@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Durgam Vahia</title>
+  <meta name="description" content="Durgam Vahia — product leader, AI practitioner, and educator. 20+ years building AI products at Google, DoorDash, LinkedIn, and Nimeyo." />
+
+  <!-- Google Analytics — replace GA_MEASUREMENT_ID with your ID once site is live -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script> -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --text-primary: #1a1a1a;
+      --text-secondary: #555;
+      --text-tertiary: #999;
+      --border: #e5e5e5;
+      --bg: #fafaf8;
+      --bg-card: #f4f3f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site { max-width: 640px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4rem;
+    }
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-name:hover { opacity: 0.7; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a.active { color: var(--text-primary); }
+
+    /* PAGE HEADER */
+    .page-header { margin-bottom: 3.5rem; }
+    .page-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      max-width: 560px;
+    }
+
+    /* SECTIONS */
+    .section { margin-bottom: 3.5rem; }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+    }
+
+    /* BIO */
+    .bio p {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+    }
+    .bio p:last-child { margin-bottom: 0; }
+
+    /* EXPERIENCE */
+    .exp-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+    }
+    .exp-row:first-child { border-top: 1px solid var(--border); }
+    .exp-left { flex: 1; }
+    .exp-co {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    .exp-role { font-size: 13px; font-weight: 300; color: var(--text-secondary); }
+    .exp-yr { font-size: 12px; color: var(--text-tertiary); flex-shrink: 0; }
+
+    /* TEACHING */
+    .teach-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+    }
+    .teach-row:first-child { border-top: 1px solid var(--border); }
+    .teach-left { flex: 1; }
+    .teach-course {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    .teach-school { font-size: 13px; font-weight: 300; color: var(--text-secondary); }
+    .teach-link {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      flex-shrink: 0;
+      align-self: center;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .teach-link:hover { color: var(--text-primary); border-color: var(--text-primary); }
+
+    /* EDUCATION */
+    .edu-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+    }
+    .edu-row:first-child { border-top: 1px solid var(--border); }
+    .edu-degree { font-size: 14px; font-weight: 400; color: var(--text-primary); }
+    .edu-school { font-size: 13px; font-weight: 300; color: var(--text-secondary); margin-top: 2px; }
+    .edu-yr { font-size: 12px; color: var(--text-tertiary); flex-shrink: 0; }
+
+    /* CONNECT */
+    .connect-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .connect-link {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .connect-link:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+    .connect-link svg { width: 13px; height: 13px; opacity: 0.6; }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-tertiary);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    footer a { color: var(--text-tertiary); text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--text-primary); }
+
+    @media (max-width: 600px) {
+      .site { padding: 2rem 1.25rem 4rem; }
+      nav { flex-direction: column; gap: 1rem; }
+      .page-header h1 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+
+    <nav>
+      <a class="nav-name" href="index.html">Durgam Vahia</a>
+      <div class="nav-links">
+        <a href="index.html">Essays</a>
+        <a href="about.html" class="active">About</a>
+      </div>
+    </nav>
+
+    <div class="page-header">
+      <h1>About</h1>
+      <p>I've spent more than two decades building technology products across every layer of the stack — from data infrastructure for Gemini at Google, to consumer AI at LinkedIn, to a three-sided marketplace platform at DoorDash, to a startup I founded and took from zero to revenue in 2012. That range taught me that hard problems are rarely solved by technology alone.</p>
+    </div>
+
+    <div class="section bio">
+      <p class="section-label">Background</p>
+      <p>I currently lead data product management at Google, serving the machine learning, experimentation, and analytics needs of some of the largest consumer experiences in the world — including Gemini's training data infrastructure.</p>
+      <p>Before Google, I was Head of Data Products at DoorDash, where I built the data platform underpinning a three-sided marketplace across consumers, merchants, and drivers. Before that, I spent four years at LinkedIn as Principal PM leading AI-powered analytics and guidance products.</p>
+      <p>In 2012 — before most enterprises had an AI strategy — I founded Nimeyo, an enterprise AI chatbot company for sales, support, and services. We sold into Cisco, Okta, Citrix, and others. That early work taught me where AI actually breaks: not in the model, but in the data, the org, and the decisions around both.</p>
+      <p>I began my career as a chip designer at Sun Microsystems, eventually working up through servers, operating systems, and virtualization. That full-stack foundation shapes how I see AI today — from the silicon underneath it to the business decisions it enables.</p>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Experience</p>
+      <div>
+        <div class="exp-row">
+          <div class="exp-left">
+            <p class="exp-co">Google</p>
+            <p class="exp-role">PM Lead, AI Foundations · Gemini training data</p>
+          </div>
+          <span class="exp-yr">2022 – present</span>
+        </div>
+        <div class="exp-row">
+          <div class="exp-left">
+            <p class="exp-co">DoorDash</p>
+            <p class="exp-role">Head of Data Products</p>
+          </div>
+          <span class="exp-yr">2021 – 2022</span>
+        </div>
+        <div class="exp-row">
+          <div class="exp-left">
+            <p class="exp-co">LinkedIn</p>
+            <p class="exp-role">Principal PM, AI Analytics & Guidance</p>
+          </div>
+          <span class="exp-yr">2017 – 2021</span>
+        </div>
+        <div class="exp-row">
+          <div class="exp-left">
+            <p class="exp-co">Nimeyo Inc.</p>
+            <p class="exp-role">Founder & CEO · Enterprise AI</p>
+          </div>
+          <span class="exp-yr">2012 – 2017</span>
+        </div>
+        <div class="exp-row">
+          <div class="exp-left">
+            <p class="exp-co">Sun Microsystems / Oracle</p>
+            <p class="exp-role">Engineering → Senior Manager · UltraSPARC, OS, virtualization</p>
+          </div>
+          <span class="exp-yr">1998 – 2012</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Teaching</p>
+      <div>
+        <div class="teach-row">
+          <div class="teach-left">
+            <p class="teach-course">AI in Business</p>
+            <p class="teach-school">Northeastern University · D'Amore-McKim School of Business</p>
+          </div>
+          <a class="teach-link" href="https://siliconvalley.northeastern.edu/faculty-feature-durgam-vahia/" target="_blank" rel="noopener">Faculty profile ↗</a>
+        </div>
+        <div class="teach-row">
+          <div class="teach-left">
+            <p class="teach-course">The Business of AI</p>
+            <p class="teach-school">UC Santa Cruz Extension</p>
+          </div>
+          <a class="teach-link" href="https://www.ucsc-extension.edu/about/instructors/durgam-vahia" target="_blank" rel="noopener">Instructor profile ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Education</p>
+      <div>
+        <div class="edu-row">
+          <div>
+            <p class="edu-degree">MBA</p>
+            <p class="edu-school">Haas School of Business, UC Berkeley</p>
+          </div>
+        </div>
+        <div class="edu-row">
+          <div>
+            <p class="edu-degree">MS, Electrical & Computer Engineering</p>
+            <p class="edu-school">University of Massachusetts Amherst</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Connect</p>
+      <div class="connect-links">
+        <a class="connect-link" href="https://www.linkedin.com/in/durgamvahia" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z"/></svg>
+          LinkedIn
+        </a>
+        <a class="connect-link" href="mailto:durgam.vahia@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Email
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <a href="index.html">← All essays</a>
+      <span>© 2026 Durgam Vahia</span>
+    </footer>
+
+  </div>
+</body>
+</html>
