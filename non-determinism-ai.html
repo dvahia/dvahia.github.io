@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Non-Determinism in Enterprise AI: What It Actually Is, Where It Comes From, and What To Do About It — Durgam Vahia</title>
+<meta name="description" content="Statistical, probabilistic, and non-deterministic are three distinct properties of AI systems. Conflating them is one of the most common and costly mistakes in enterprise AI adoption.">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQH0BCJ1S1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CQH0BCJ1S1');
+  </script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1917;
+    --ink-2: #3a3835;
+    --ink-3: #6b6763;
+    --ink-4: #9c9890;
+    --paper: #faf9f6;
+    --paper-2: #f0ede6;
+    --paper-3: #e4e0d6;
+    --border: rgba(26,25,23,0.1);
+    --border-med: rgba(26,25,23,0.18);
+    --serif: 'EB Garamond', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+
+  html { font-size: 18px; -webkit-font-smoothing: antialiased; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  nav {
+    padding: 2rem 0 1.75rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3.5rem;
+  }
+  nav a {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--ink-3);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  nav a:first-child { font-size: 0.85rem; font-weight: 500; color: var(--ink); }
+  nav a:hover { color: var(--ink); }
+  .nav-links { display: flex; gap: 1.5rem; }
+
+  header { margin-bottom: 3rem; }
+  .essay-meta {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--ink-4);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+  .lede {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    font-style: italic;
+    border-left: 2px solid var(--border-med);
+    padding-left: 1.25rem;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 2.75rem 0 0.9rem;
+    line-height: 1.25;
+  }
+  p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--ink-2);
+    margin-bottom: 1.1rem;
+  }
+  p strong { font-weight: 500; color: var(--ink); }
+  p em { font-style: italic; }
+  a { color: var(--ink); }
+  a:hover { color: var(--ink-3); }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.75rem 0;
+  }
+
+  blockquote {
+    border-left: 2px solid var(--ink-3);
+    padding: 0.1rem 0 0.1rem 1.25rem;
+    margin: 1.75rem 0;
+  }
+  blockquote p {
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--ink);
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  .def-list { margin: 1.5rem 0 1.75rem; }
+  .def-item {
+    padding: 0.9rem 0 0.9rem 1.25rem;
+    border-left: 1px solid var(--border-med);
+    margin-bottom: 0.5rem;
+    transition: border-color 0.15s;
+  }
+  .def-item:hover { border-color: var(--ink-3); }
+  .def-term {
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.25rem;
+  }
+  .def-body {
+    font-size: 0.95rem;
+    color: var(--ink-3);
+    line-height: 1.65;
+  }
+  .def-body em { font-style: italic; }
+  .def-body strong { font-weight: 500; color: var(--ink-2); }
+
+  /* 2x2 matrix — all content visible, no click */
+  .matrix-section { margin: 1.75rem 0 2rem; }
+  .matrix-axis-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    color: var(--ink-4);
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .matrix-main { display: flex; gap: 10px; }
+  .matrix-y-wrap {
+    position: relative;
+    width: 14px;
+    flex-shrink: 0;
+  }
+  .matrix-y-label {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .matrix-y-label span {
+    position: absolute;
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    color: var(--ink-4);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+  .matrix-y-label span.y-top {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
+  }
+  .matrix-y-label span.y-bottom {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
+  }
+  ul.def-bullets {
+    margin: 1rem 0 1.25rem 1.25rem;
+    padding: 0;
+  }
+  ul.def-bullets li {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink-2);
+    line-height: 1.75;
+    margin-bottom: 0.5rem;
+  }
+  ul.def-bullets li strong { font-weight: 500; color: var(--ink); }
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    flex: 1;
+  }
+  .quad {
+    background: var(--paper-2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.9rem;
+  }
+  .quad-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 0.4rem;
+  }
+  .quad-title {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .quad-pill {
+    font-family: var(--sans);
+    font-size: 0.62rem;
+    padding: 1px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+  }
+  .pill-go { background: #d8eed8; color: #2a5c2a; }
+  .pill-guard { background: #f0e8cc; color: #6b4e10; }
+  .pill-no { background: #f0dada; color: #7a2020; }
+  .quad-hint {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    color: var(--ink-4);
+    line-height: 1.45;
+    margin-bottom: 0.5rem;
+  }
+  .quad-body {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    color: var(--ink-3);
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+    padding-top: 0.5rem;
+    margin-top: 0.1rem;
+  }
+  .quad-body strong { font-weight: 500; color: var(--ink-2); }
+  .quad-rec {
+    margin-top: 0.45rem;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    color: var(--ink-4);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* Use case cards — static, no accordion */
+  .uc-list { margin: 1.5rem 0 1.75rem; }
+  .uc-card {
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    margin-bottom: 6px;
+    background: var(--paper);
+  }
+  .uc-trigger-static {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .uc-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .uc-info { flex: 1; min-width: 0; }
+  .uc-name { font-family: var(--sans); font-size: 0.82rem; font-weight: 500; color: var(--ink); }
+  .uc-sub { font-family: var(--sans); font-size: 0.72rem; color: var(--ink-4); margin-top: 1px; }
+  .uc-badge { font-family: var(--sans); font-size: 0.65rem; padding: 2px 8px; border-radius: 2px; white-space: nowrap; flex-shrink: 0; }
+  .uc-panel-static { padding: 0 1rem 1rem; }
+  .uc-panel-static p {
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    color: var(--ink-3);
+    line-height: 1.7;
+    margin-top: 0.85rem;
+    margin-bottom: 0;
+  }
+  .uc-panel-static p strong { font-weight: 500; color: var(--ink-2); }
+  .uc-panel-static p em { font-style: italic; }
+  .uc-rec {
+    margin-top: 0.85rem;
+    padding: 0.65rem 0.85rem;
+    background: var(--paper-2);
+    border-radius: 2px;
+  }
+  .uc-rec-label {
+    font-family: var(--sans);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .uc-rec p { font-size: 0.78rem; margin: 0; color: var(--ink-3); }
+
+
+
+  /* Closing */
+  .closing-note {
+    margin: 2.5rem 0;
+    padding: 1.5rem;
+    background: var(--ink);
+    border-radius: 3px;
+  }
+  .closing-note p {
+    color: rgba(250,249,246,0.65);
+    font-family: var(--serif);
+    font-size: 0.98rem;
+    line-height: 1.75;
+    margin-bottom: 0.85rem;
+  }
+  .closing-note p:last-child { margin: 0; }
+  .closing-note strong { color: var(--paper); font-weight: 400; font-style: italic; font-size: 1.1rem; }
+
+  footer {
+    padding: 2.5rem 0 3rem;
+    border-top: 1px solid var(--border);
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer a { font-family: var(--sans); font-size: 0.8rem; color: var(--ink-4); text-decoration: none; }
+  footer a:hover { color: var(--ink); }
+  .footer-links { display: flex; gap: 1.25rem; }
+
+  @media (max-width: 600px) {
+    html { font-size: 17px; }
+    body { padding: 0 1.25rem; }
+    h1 { font-size: 1.9rem; }
+    .matrix-grid { grid-template-columns: 1fr; }
+    .uc-badge { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://dvahia.github.io/index.html">Durgam Vahia</a>
+  <div class="nav-links">
+    <a href="https://dvahia.github.io/about.html">About Me</a>
+  </div>
+</nav>
+
+<header>
+  <div class="essay-meta">Essay &nbsp;·&nbsp; May 2026</div>
+  <h1>Non-Determinism in Enterprise AI: What It Actually Is, Where It Comes From, and What To Do About It</h1>
+  <p class="lede">Statistical, probabilistic, and non-deterministic are three distinct properties of AI systems. Conflating them is one of the most common and costly mistakes in enterprise AI adoption.</p>
+</header>
+
+<p>A barrier keeps appearing in enterprise AI adoption, and it sounds like this: the system gives different answers to the same question. If you cannot reproduce an output, can you trust it? Can you act on it? Can you defend it when something goes wrong? I have heard this from product teams, operations leads, and executives across industries. The concern is real. But the diagnosis conflates three different things, and the wrong conclusion follows. Organizations end up either avoiding AI where it would serve them, or deploying it without designing the workflow to absorb its properties.</p>
+
+<h2>Three terms, three different things</h2>
+
+<p>The industry uses "statistical," "probabilistic," and "non-deterministic" interchangeably. They are not the same thing. I have used them loosely myself. The imprecision is not harmless: it hides the actual source of the problem, which makes it harder to fix.</p>
+
+<div class="def-list">
+  <div class="def-item">
+    <div class="def-term">Statistical</div>
+    <div class="def-body">How the model was <em>built</em>. LLMs learn relationships between words and concepts by finding patterns across billions of examples. This describes the training methodology, not how the system behaves at runtime.</div>
+  </div>
+  <div class="def-item">
+    <div class="def-term">Probabilistic</div>
+    <div class="def-body">How the model <em>reasons</em>. At each step, an LLM computes a probability distribution over possible next outputs, and selects from it. This describes the inference mechanism, not a guarantee of variance across runs.</div>
+  </div>
+  <div class="def-item">
+    <div class="def-term">Non-deterministic</div>
+    <div class="def-body">The relationship between <em>inputs and outputs</em>. A non-deterministic system produces different outputs when given the same inputs. This is the property that matters for enterprise workflows, and it is <strong>not automatically implied</strong> by being statistical or probabilistic.</div>
+  </div>
+</div>
+
+<p>A lead scoring model trained on years of CRM conversion data produces the same score for the same lead inputs every time. A revenue forecast model built on historical pipeline data outputs the same projection for the same inputs every time. A fraud detection system classifying transactions produces the same result for the same transaction every time. All three are statistical systems built on learned patterns. None of them are non-deterministic. Being built on statistics does not make a system produce different outputs from the same inputs.</p>
+
+<blockquote>
+  <p>The confusion arises because LLMs as experienced through consumer products do behave variably. That variability has a specific source, and it is not the training methodology.</p>
+</blockquote>
+
+<h2>Where the variance actually comes from</h2>
+
+<p>Two sources produce variance in LLM outputs. They have different remedies, which is why they are worth separating.</p>
+
+<p><strong>Intentional variance at inference time.</strong> LLMs have a parameter called temperature that controls how freely the model samples at each token selection step. High temperature produces varied outputs. Low temperature concentrates selection toward the most probable output. Consumer products are configured with high temperature by design, because variety improves the experience. Enterprise deployments have direct control over this parameter. Most organizations using off-the-shelf AI products have no visibility into how it is set. What they experience as a property of the technology is a configuration choice made for a different context.</p>
+
+<p><strong>Infrastructure-level variance.</strong> Even with temperature set to zero, a small residual variance persists. Modern LLM inference runs on GPU clusters where thousands of operations execute in parallel. Floating-point arithmetic at that scale is not perfectly associative: the order in which operations complete can produce tiny numerical differences that occasionally cascade into a different token selection. This exists in any large parallel computation, not just LLMs. What differs is the magnitude of downstream impact. A small numerical shift in token probabilities can produce a meaningfully different sentence. The same shift in a fraud score is invisible.</p>
+
+<p>Neither source is an inherent property of statistical modeling. Both are manageable through design.</p>
+
+<h2>The question worth asking</h2>
+
+<p>The right question is not "is this system deterministic?" It is: <em>what is the cost of a wrong or inconsistent output at this point in the workflow, and how quickly does that cost become irreversible?</em></p>
+
+<p>Two dimensions determine how much non-determinism a workflow can absorb:</p>
+
+<ul class="def-bullets">
+  <li><strong>Variance tolerance.</strong> How much it matters whether the output is consistent across runs. In some tasks a range of outputs is useful. In others, the same input must reliably produce the same output.</li>
+  <li><strong>Reversibility.</strong> How quickly a wrong output creates consequence that cannot be undone. A human catching a bad draft before it ships is different from an agent executing a transaction before anyone sees it.</li>
+</ul>
+
+<p>Plotted against each other:</p>
+
+<div class="matrix-section">
+  <div class="matrix-axis-row"><span>← Low variance tolerance</span><span>High variance tolerance →</span></div>
+  <div class="matrix-main">
+    <div class="matrix-y-wrap">
+      <div class="matrix-y-label">
+        <span class="y-top">High reversibility</span>
+        <span class="y-bottom">Low reversibility</span>
+      </div>
+    </div>
+    <div class="matrix-grid">
+
+      <div class="quad">
+        <div class="quad-header">
+          <div class="quad-title">LLM with guardrails</div>
+          <span class="quad-pill pill-guard">Proceed carefully</span>
+        </div>
+        <div class="quad-hint">Contract drafting, code generation, email drafts</div>
+        <div class="quad-body">
+          Output needs to be consistently useful, but a human reviews before anything takes effect. The LLM accelerates the work. The person owns the decision.
+          <div class="quad-rec">Design for: structured outputs, clear review gates, constrained context.</div>
+        </div>
+      </div>
+
+      <div class="quad">
+        <div class="quad-header">
+          <div class="quad-title">Ideal territory</div>
+          <span class="quad-pill pill-go">Go fast</span>
+        </div>
+        <div class="quad-hint">Marketing copy, campaign ideation, competitive briefings</div>
+        <div class="quad-body">
+          Variance is a feature. Ten ad copy variations are more useful than one. Human selection happens naturally. Wrong outputs cost nothing.
+          <div class="quad-rec">Design for: high throughput, average quality measurement, human curation.</div>
+        </div>
+      </div>
+
+      <div class="quad">
+        <div class="quad-header">
+          <div class="quad-title">Wrong architecture</div>
+          <span class="quad-pill pill-no">Redesign</span>
+        </div>
+        <div class="quad-hint">Autonomous financial transactions, real-time clinical decisions</div>
+        <div class="quad-body">
+          Consequences propagate before anyone can review the output. LLM alone is the wrong tool for the decision layer.
+          <div class="quad-rec">Design for: deterministic decision logic, LLMs only upstream for synthesis and summarization.</div>
+        </div>
+      </div>
+
+      <div class="quad">
+        <div class="quad-header">
+          <div class="quad-title">Sandbox and observe</div>
+          <span class="quad-pill pill-guard">Proceed carefully</span>
+        </div>
+        <div class="quad-hint">Customer-facing agents, real-time recommendation engines</div>
+        <div class="quad-body">
+          The task tolerates range, but actions execute before review. Sandbox the system: constrain what it can execute autonomously, observe outputs at scale before expanding permissions, and keep irreversible actions behind an explicit approval step.
+          <div class="quad-rec">Design for: sandboxed execution, observable outputs, human approval before irreversible actions.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<h2>What this looks like across functions</h2>
+
+<div class="uc-list">
+
+  <div class="uc-card">
+    <div class="uc-trigger-static">
+      <div class="uc-dot" style="background:#2a6b3c"></div>
+      <div class="uc-info">
+        <div class="uc-name">Sales &amp; marketing</div>
+        <div class="uc-sub">Ad copy · outreach sequences · campaign variations</div>
+      </div>
+      <span class="uc-badge pill-go">High tolerance · High reversibility</span>
+    </div>
+    <div class="uc-panel-static">
+      <p>I built a sales intelligence product that recommended to salespeople which accounts to target and which leads to pursue. Early on, we made it highly deterministic: the same inputs produced the same ranked list every time. The system was technically correct. The salespeople stopped using it. The feedback was blunt: the recommendations matched what they already knew, and seeing the same list repeatedly told them nothing new. One rep put it plainly: "This just confirms what I already think. Why do I need it?"</p>
+      <p>We deliberately introduced variance into the recommendations, surfacing accounts the model was less certain about, mixing in lower-ranked leads that had unexpected signal. Adoption went up significantly. The non-determinism was not a bug we had failed to fix. It was the feature that made the product worth using. Serendipity turned out to be valuable, and a fully deterministic system could not deliver it.</p>
+      <p>The lesson generalized: in tasks where a human is going to make the final call anyway, variance in the AI output is often an asset. The governance instinct that works in other workflows is counterproductive here.</p>
+      <div class="uc-rec">
+        <div class="uc-rec-label" style="color:#2a6b3c">Learnings</div>
+        <p>Measure average output quality and human selection rate. Do not try to eliminate variance. The human curation step is the quality gate, and some degree of novelty in the outputs is often what makes the system worth returning to.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card">
+    <div class="uc-trigger-static">
+      <div class="uc-dot" style="background:#8c6010"></div>
+      <div class="uc-info">
+        <div class="uc-name">Procurement &amp; contract review</div>
+        <div class="uc-sub">Vendor agreements · risk flagging · clause analysis</div>
+      </div>
+      <span class="uc-badge pill-guard">Low tolerance · High reversibility</span>
+    </div>
+    <div class="uc-panel-static">
+      <p>A procurement team processing hundreds of vendor agreements per year faces a real throughput problem. Legal review takes weeks. The pressure to route "low-risk" contracts without full review is constant, and organizations quietly accumulate unmanaged exposure as a result.</p>
+      <p>LLMs are useful here for exactly the tasks that create the bottleneck: identifying contracts with non-standard liability terms, flagging missing compliance provisions, surfacing clauses that fall outside approved playbook language. The model does not need to produce identical output for two similar contracts. It needs to reliably catch the things that matter.</p>
+      <p>The risk is in confusing triage with decision. A contract that passes AI review and gets signed without a person seeing the flagged clauses has created legal exposure. The window between output and consequence is short but it exists, and the reversibility disappears at signing.</p>
+      <div class="uc-rec">
+        <div class="uc-rec-label" style="color:#8c6010">Learnings</div>
+        <p>Use AI for triage and surfacing. Keep a person in the decision seat for anything flagged as non-standard. Structure the output so the model's reasoning is visible and auditable, not just its conclusion.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card">
+    <div class="uc-trigger-static">
+      <div class="uc-dot" style="background:#9b2929"></div>
+      <div class="uc-info">
+        <div class="uc-name">Autonomous agents &amp; real-time execution</div>
+        <div class="uc-sub">Auto-renewals · real-time pricing · refund processing</div>
+      </div>
+      <span class="uc-badge pill-no">Low tolerance · Low reversibility</span>
+    </div>
+    <div class="uc-panel-static">
+      <p>I run a portfolio of products and rely increasingly on natural language queries powered by agents to track how my metrics are trending day to day. The workflow sounds straightforward: ask a question in plain language, get a number back. In practice, the same question asked on consecutive days can produce different results, because the path from natural language to SQL to the underlying data model involves enough ambiguity that small variations in interpretation compound. I cannot tell whether a metric moved or whether the query was resolved differently. That uncertainty is enough to make me distrust the output entirely, which defeats the purpose. The non-determinism here is not catastrophic in a single instance. It is corrosive over time.</p>
+      <p>An agent that surfaces a vendor renewal for human approval and an agent that initiates the renewal autonomously are not different in degree. They are different in kind. In the first case, a wrong or inconsistent output is a minor inconvenience. In the second, it is a binding commitment that may take weeks to unwind.</p>
+      <p>The same asymmetry runs through autonomous refund processing, real-time pricing adjustments, and any workflow where the AI's output takes effect before a person sees it. The probabilistic reasoning layer is not the problem. The problem is the absence of a gap between output and consequence.</p>
+      <p>Let the model reason. Constrain what it can execute. The reasoning can be probabilistic. The action layer should be deterministic, with explicit permission boundaries and human approval for anything irreversible.</p>
+      <div class="uc-rec">
+        <div class="uc-rec-label" style="color:#9b2929">Learnings</div>
+        <p>Define the boundary between what the system can do and what it can only recommend. Make that boundary explicit in the architecture, not just the documentation.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card">
+    <div class="uc-trigger-static">
+      <div class="uc-dot" style="background:#1e4fa3"></div>
+      <div class="uc-info">
+        <div class="uc-name">Compliance &amp; regulated workflows</div>
+        <div class="uc-sub">Credit decisions · clinical documentation · legal audit trails</div>
+      </div>
+      <span class="uc-badge" style="background:#dde8f8;color:#1e4fa3">Reproducibility required</span>
+    </div>
+    <div class="uc-panel-static">
+      <p>Regulated industries require more than accuracy. They require reproducibility. The same input must produce the same output, every time, demonstrably. Non-determinism breaks this even when the output happens to be correct.</p>
+      <p>Consider credit decisioning. If an AI system produces slightly different rationales for two nearly identical applications, the institution cannot demonstrate to a regulator that its decision logic is consistent and non-discriminatory. The problem is not that the decisions are wrong. It is that they cannot be reproduced and therefore cannot be defended.</p>
+      <p>A system can be accurate on average and still be undeployable in a regulated context if its outputs cannot be reproduced on demand. The audit trail requirement is independent of the quality requirement.</p>
+      <div class="uc-rec">
+        <div class="uc-rec-label" style="color:#1e4fa3">Learnings</div>
+        <p>Keep the decision layer deterministic and auditable. Use AI upstream for the tasks that do not require reproducibility: synthesizing regulatory guidance, summarizing case files, structuring documentation. The decision itself should not be probabilistic.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<h2>The underlying point</h2>
+
+<p>LLMs are statistical in how they were trained. They are probabilistic in how they reason. Non-determinism is a design and infrastructure property with specific, known sources that respond to specific architectural choices.</p>
+
+<p>The practical implication is that trying to eliminate non-determinism at the infrastructure level is largely futile. Designing workflows that absorb variance before it becomes consequence is not. Human checkpoints, structured output formats, retrieval-augmented generation, staged approval workflows — these are not compensations for a weak technology. They are the right architecture for a probabilistic system in an environment that requires reliability.</p>
+
+<p>"This technology is inherently unpredictable" and "this technology requires different design patterns than deterministic systems" are not the same claim. The gap between them determines which questions get asked, which use cases get attempted, and which workflows get built versus abandoned.</p>
+
+<div class="closing-note">
+  <p>Imprecision in language produces imprecision in thinking. When I see "statistical," "probabilistic," and "non-deterministic" used as synonyms, I do not see a terminology issue. I see the mechanism by which a solvable problem gets mischaracterized as a fundamental limitation.</p>
+  <p>There is a lot of noise in the AI conversation. Strong claims, weak reasoning, conclusions that outrun their premises. This is an attempt to contribute signal.</p>
+  <p><strong>The technology is not the obstacle. The mental model is.</strong></p>
+</div>
+
+<hr>
+
+<p style="font-family:var(--sans);font-size:0.8rem;color:var(--ink-4);font-style:italic;">Before the next AI deployment decision: can you place each candidate workflow in the matrix above? If not, that is the first thing to resolve.</p>
+
+<footer>
+  <a href="https://dvahia.github.io/index.html">← All essays</a>
+  <div class="footer-links">
+    <a href="mailto:durgam.vahia@gmail.com">durgam.vahia@gmail.com</a>
+  </div>
+</footer>
+
+
+
+</body>
+</html>
