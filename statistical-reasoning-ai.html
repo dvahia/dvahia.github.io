@@ -23,7 +23,7 @@
       --muted: #666;
       --accent: #1a1a1a;
       --border: #e0e0e0;
-      --bg: #ffffff;
+      --bg: #fafaf8;
       --blockquote-bg: #f7f7f7;
       --max-width: 680px;
     }
@@ -42,31 +42,44 @@
     nav {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 32px 0 0;
+      padding: 2rem 0 2rem;
       display: flex;
-      gap: 24px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4rem;
     }
-
-    nav a {
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
       color: var(--text);
       text-decoration: none;
-      border-bottom: 1px solid transparent;
     }
-
-    nav a:hover {
-      border-bottom-color: var(--text);
+    .nav-name:hover { opacity: 0.7; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
     }
+    .nav-links a:hover { color: var(--text); }
 
     .essay-meta {
       max-width: var(--max-width);
-      margin: 48px auto 0;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      color: var(--muted);
-      letter-spacing: 0.02em;
+      margin: 0 auto 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+    .essay-pill {
+      font-size: 11px;
+      padding: 2px 9px;
+      border-radius: 20px;
+      background: #f4f3f0;
+      color: var(--muted);
+    }
+    .essay-date { font-size: 12px; color: var(--muted); }
 
     h1 {
       max-width: var(--max-width);
@@ -81,10 +94,13 @@
     .lede {
       max-width: var(--max-width);
       margin: 20px auto 0;
-      font-size: 18px;
+      font-size: 16px;
+      font-weight: 300;
       color: var(--muted);
       font-style: italic;
-      line-height: 1.6;
+      line-height: 1.7;
+      border-left: 2px solid var(--border);
+      padding-left: 1.25rem;
     }
 
     .divider {
@@ -203,11 +219,16 @@
 <body>
 
   <nav>
-    <a href="https://dvahia.github.io/index.html">Durgam Vahia</a>
-    <a href="https://dvahia.github.io/about.html">About Me</a>
+    <a class="nav-name" href="https://dvahia.github.io/index.html">Durgam Vahia</a>
+    <div class="nav-links">
+      <a href="https://dvahia.github.io/about.html">About Me</a>
+    </div>
   </nav>
 
-  <div class="essay-meta">Essay &middot; June 2026</div>
+  <div class="essay-meta">
+    <span class="essay-pill">Essay</span>
+    <span class="essay-date">Jun 2026</span>
+  </div>
 
   <h1>AI Speaks in Language. It Reasons in Statistics.</h1>
 
