@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQH0BCJ1S1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CQH0BCJ1S1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI operates statistically but presents linguistically. Three quantitative tools — base rates, precision and recall, and statistical significance — give you a way to reason about AI outputs that the language layer alone cannot.">
+  <title>AI Speaks in Language. It Reasons in Statistics. — Durgam Vahia</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text: #1a1a1a;
+      --muted: #666;
+      --accent: #1a1a1a;
+      --border: #e0e0e0;
+      --bg: #ffffff;
+      --blockquote-bg: #f7f7f7;
+      --max-width: 680px;
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      line-height: 1.75;
+      color: var(--text);
+      background: var(--bg);
+      padding: 0 24px;
+    }
+
+    nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 0 0;
+      display: flex;
+      gap: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-size: 14px;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav a:hover {
+      border-bottom-color: var(--text);
+    }
+
+    .essay-meta {
+      max-width: var(--max-width);
+      margin: 48px auto 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      max-width: var(--max-width);
+      margin: 16px auto 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: normal;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    .lede {
+      max-width: var(--max-width);
+      margin: 20px auto 0;
+      font-size: 18px;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    .divider {
+      max-width: var(--max-width);
+      margin: 40px auto;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+    }
+
+    .content h2 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 48px 0 20px;
+    }
+
+    blockquote {
+      margin: 28px 0;
+      padding: 20px 24px;
+      background: var(--blockquote-bg);
+      border-left: 3px solid var(--text);
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    blockquote p {
+      margin: 0;
+    }
+
+    .section-close {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 28px 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    thead tr {
+      border-bottom: 2px solid var(--text);
+    }
+
+    th {
+      text-align: left;
+      padding: 8px 12px 10px 0;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    td {
+      padding: 12px 12px 12px 0;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    td:first-child {
+      font-weight: 600;
+      white-space: nowrap;
+      padding-right: 24px;
+    }
+
+    .closing-note {
+      margin: 48px 0 0;
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .back-link {
+      display: block;
+      max-width: var(--max-width);
+      margin: 48px auto 64px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .back-link:hover {
+      border-bottom-color: var(--text);
+    }
+
+    @media (max-width: 600px) {
+      body { font-size: 17px; }
+      td:first-child { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="https://dvahia.github.io/index.html">Durgam Vahia</a>
+    <a href="https://dvahia.github.io/about.html">About Me</a>
+  </nav>
+
+  <div class="essay-meta">Essay &middot; June 2026</div>
+
+  <h1>AI Speaks in Language. It Reasons in Statistics.</h1>
+
+  <p class="lede">AI operates statistically but presents linguistically. Three quantitative tools give you a way to reason about AI outputs that the language layer alone cannot.</p>
+
+  <hr class="divider">
+
+  <div class="content">
+
+    <p>A startup founder interviews a VP of Sales candidate with two successful exits and a track record of scaling revenue past $100M. The AI-assisted research confirms the pattern: strong closer, proven at scale, references check out. The hire happens. Six months later, the founder is unwinding the decision. Months of runway spent training and managing instead of building and validating. The opportunity cost at that stage is enormous.</p>
+
+    <p>A consumer marketplace launches a food recommendation model. The model is classifying menu items, deciding what is pizza and what isn&#8217;t. The team is proud of the accuracy numbers. Users start posting screenshots on social media of burritos served up when they searched for pizza. Orders stall. Trust takes a public hit.</p>
+
+    <p>A product team runs their quarterly planning on the back of an AI-generated summary of customer feedback. Five themes. Clean, authoritative, confident. The roadmap shifts. Months later, two of those themes turn out to be the same complaint phrased differently, and a third came disproportionately from a single customer segment that represented less than 8% of revenue. An engineering team&#8217;s quarter spent on the wrong priorities.</p>
+
+    <p>Each of these had real business consequences. The decisions themselves were reasonable. The missing piece was a reasoning layer that sits below the language AI produces. AI is very good at language. It presents every output, reliable or not, well-sampled or not, appropriately scoped or not, with the same fluent, confident, human-sounding voice. That confidence is not calibrated to the quality of the underlying data. It is just how the technology works.</p>
+
+    <p>There are three quantitative tools that cut through it. They don&#8217;t require a statistics degree. I&#8217;ve taught them to non-technical business students and watched the concepts land in an hour. What they require is the discipline to apply them before acting on what AI tells you.</p>
+
+    <hr class="divider">
+
+    <h2>Base Rate Reasoning</h2>
+
+    <p>Before you evaluate any specific AI output, ask what class of problem you&#8217;re dealing with and what the baseline probability looks like for that class.</p>
+
+    <p>This is base rate reasoning, and AI systematically skips it. When you ask an AI to assess a candidate, analyze a market opportunity, or evaluate a strategic move, it reasons about the specific instance in front of it. It does not anchor to the population-level probability first. You have to do that yourself.</p>
+
+    <p>The VP of Sales hire is a base rate problem. Startups at pre-product-market-fit fail to retain sales leaders at very high rates. The conditions for a sales-led motion don&#8217;t yet exist. The company hasn&#8217;t validated what it&#8217;s selling, to whom, at what price, through what motion. A senior sales executive dropped into that environment faces a structural mismatch regardless of individual capability. The AI research confirmed the candidate. Nobody asked whether the role made sense at that stage of the company.</p>
+
+    <p>That is the base rate question: what is the probability of success for this class of situation, before evaluating the specific instance? Once you anchor there, the individual assessment becomes secondary. In this case, anchoring to the class-level probability changes the decision entirely, from evaluating candidates to questioning whether the hire should happen at all.</p>
+
+    <p>The same discipline applies to AI outputs directly. When an AI tells you that a particular product feature will resonate with enterprise buyers, or that a competitor is pulling ahead in a specific segment, ask: what is the base rate of AI-generated market assessments being accurate at this level of specificity? The model is drawing on patterns from training data that may have nothing to do with your market, your timing, or your competitive position.</p>
+
+    <blockquote>
+      <p>The output sounds specific. It is a statistical inference from a population you never agreed to be part of.</p>
+    </blockquote>
+
+    <p class="section-close">Anchor to the class before you evaluate the instance.</p>
+
+    <hr class="divider">
+
+    <h2>Precision and Recall</h2>
+
+    <p>Precision and recall are ML concepts, but the underlying idea belongs to anyone who makes decisions under uncertainty. Precision measures how often you&#8217;re right when you say yes. Recall measures how often you catch the things that actually are yes. You cannot maximize both simultaneously. Every model, and every decision process, lives somewhere on that tradeoff curve.</p>
+
+    <p>The food recommendation model was built to classify menu items. Early versions ran at below 50% precision. That means more than half the items the model called &#8220;pizza&#8221; were not pizza. Users searching for pizza got sandwiches and burritos. The experience was bad enough to damage the platform&#8217;s reputation publicly. So the team pushed precision higher. Getting to 90% required human labelers reviewing images and descriptions at scale, operating across time zones, with different labeling conventions in different markets. It was expensive financially, operationally complex, and slow. Every percentage point of precision improvement cost real money and delayed launches.</p>
+
+    <p>Neither end of that curve was free. The question was never &#8220;how do we get precision to 100%?&#8221; It was &#8220;what level of precision produces the best outcome given the cost of each type of error at this stage of the business?&#8221;</p>
+
+    <p>That question transfers directly to how you use AI for decisions. When you ask an AI to screen resumes, flag risk in contracts, identify leads, or summarize feedback, the model has a precision-recall tradeoff embedded in it that you almost never see. A model optimized for recall will catch everything that might be relevant, but you&#8217;ll get false positives that waste your team&#8217;s time. A model optimized for precision will only surface high-confidence results, but you&#8217;ll miss real signals. The defaults are rarely calibrated to your specific cost of error.</p>
+
+    <p class="section-close">Before you act on an AI output in a high-stakes context, ask which type of error is more costly for this decision. A false positive in contract risk review means your legal team wastes hours. A false negative means you miss a clause that costs you in litigation. Those are not symmetric. The model doesn&#8217;t know which matters more to you. You do.</p>
+
+    <hr class="divider">
+
+    <h2>Statistical Significance</h2>
+
+    <p>The third failure mode is acting on a pattern before establishing whether the pattern is real.</p>
+
+    <p>A product team using AI to synthesize customer feedback is making a bet that the themes the model surfaces reflect something true about the customer base. That bet has conditions. How many responses went in? From what sources? Over what time period? Were they weighted equally? Did the model distinguish between a power user&#8217;s complaint and a churned user&#8217;s complaint?</p>
+
+    <p>AI doesn&#8217;t volunteer this information. It produces output that looks like analysis regardless of whether the input meets the conditions for the analysis to be valid. A summary of 40 survey responses looks identical to a summary of 4,000. The confidence of the language doesn&#8217;t scale with the robustness of the underlying data.</p>
+
+    <p>Statistical significance is the tool for asking: given what we actually observed, how likely is it that this pattern is real rather than noise? In formal terms, a p-value below 0.05 means there is less than a 5% chance the observed result happened by chance. The practical question is simpler: do I have enough signal, from a representative enough sample, over a long enough time window, to treat this as a finding rather than a hypothesis?</p>
+
+    <p>The product team that shifted their roadmap based on an AI summary had a hypothesis. They treated it as a finding. Two of the themes were artifacts of how the model grouped similar language. One was dominated by a non-representative segment. None of that was visible in the output. The cost was months of engineering time spent on the wrong priorities.</p>
+
+    <p class="section-close">Before acting on AI-synthesized analysis, ask: what would need to be true about the underlying data for this output to be reliable? Then go check whether those conditions hold. AI will not do this for you.</p>
+
+    <hr class="divider">
+
+    <h2>Putting It Together</h2>
+
+    <p>These three tools don&#8217;t make you skeptical of AI. AI is genuinely useful for synthesizing information, generating options, and accelerating analysis. The problem isn&#8217;t the tool. It&#8217;s the reasoning layer between the output and the decision.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>The question it forces</th>
+          <th>Where it breaks down without it</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Base rate reasoning</td>
+          <td>Am I solving the right problem for this class of situation?</td>
+          <td>Acting on individual signal while ignoring population-level probability</td>
+        </tr>
+        <tr>
+          <td>Precision and recall</td>
+          <td>Which error is more costly, and is the model calibrated for that?</td>
+          <td>Accepting model defaults that were never designed for your cost of being wrong</td>
+        </tr>
+        <tr>
+          <td>Statistical significance</td>
+          <td>Is this a finding or a hypothesis?</td>
+          <td>Treating AI-synthesized patterns as conclusions before the underlying data earns that weight</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The VP of Sales, the pizza model, the roadmap built on thin feedback. None of those decisions were made by careless people. They were made by capable people reasoning in the wrong register. The fluency of the output convinced them they were looking at a finding. They were looking at a probability.</p>
+
+    <div class="closing-note">
+      Before acting on the next AI output: did you anchor to the base rate, ask which error is more costly, and check whether the signal is strong enough to act on?
+    </div>
+
+  </div>
+
+  <a class="back-link" href="https://dvahia.github.io/index.html">&#8592; All essays</a>
+
+</body>
+</html>
