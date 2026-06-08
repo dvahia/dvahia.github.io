@@ -35,13 +35,13 @@
     --sans: 'DM Sans', sans-serif;
   }
 
-  html { font-size: 18px; -webkit-font-smoothing: antialiased; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
 
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: var(--serif);
-    font-weight: 400;
+    font-family: var(--sans);
+    font-weight: 300;
     line-height: 1.7;
     max-width: 680px;
     margin: 0 auto;
@@ -98,12 +98,12 @@
 
   h2 {
     font-family: var(--serif);
-    font-size: 1.45rem;
+    font-size: 13px;
     font-weight: 400;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin: 2.75rem 0 0.9rem;
-    line-height: 1.25;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin: 2.5rem 0 1rem;
   }
   p {
     font-size: 1rem;
@@ -208,7 +208,7 @@
     padding: 0;
   }
   ul.def-bullets li {
-    font-family: var(--serif);
+    font-family: var(--sans);
     font-size: 1rem;
     color: var(--ink-2);
     line-height: 1.75;
@@ -338,7 +338,7 @@
   }
   .closing-note p {
     color: rgba(250,249,246,0.65);
-    font-family: var(--serif);
+    font-family: var(--sans);
     font-size: 0.98rem;
     line-height: 1.75;
     margin-bottom: 0.85rem;
@@ -361,7 +361,6 @@
   .footer-links { display: flex; gap: 1.25rem; }
 
   @media (max-width: 600px) {
-    html { font-size: 17px; }
     body { padding: 0 1.25rem; }
     h1 { font-size: 1.9rem; }
     .matrix-grid { grid-template-columns: 1fr; }
