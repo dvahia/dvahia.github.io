@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finding the Unit | Durgam Vahia</title>
+  <meta name="description" content="Whether you build a product or a platform is not a strategic choice. It is a consequence of what your unit of value actually is. Finding the unit is the hard part." />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQH0BCJ1S1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CQH0BCJ1S1');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --text-primary: #1a1a1a;
+      --text-secondary: #555;
+      --text-tertiary: #999;
+      --border: #e5e5e5;
+      --bg: #fafaf8;
+      --bg-card: #f4f3f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site { max-width: 680px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4rem;
+    }
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .nav-name:hover { opacity: 0.7; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    /* ESSAY HEADER */
+    .essay-header { margin-bottom: 3rem; }
+    .essay-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+    .essay-pill {
+      font-size: 11px;
+      padding: 2px 9px;
+      border-radius: 20px;
+      background: var(--bg-card);
+      color: var(--text-tertiary);
+    }
+    .essay-date { font-size: 12px; color: var(--text-tertiary); }
+    .essay-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--text-primary);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+    .essay-deck {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      border-left: 2px solid var(--border);
+      padding-left: 1.25rem;
+    }
+
+    /* ESSAY BODY */
+    .essay-body { font-size: 16px; font-weight: 300; color: var(--text-secondary); line-height: 1.85; }
+    .essay-body p { margin-bottom: 1.5rem; }
+    .essay-body p:last-child { margin-bottom: 0; }
+
+    .essay-body h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin: 2.5rem 0 1rem;
+    }
+
+    .essay-body blockquote {
+      margin: 2rem 0;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-card);
+      border-radius: 4px;
+      border-left: 3px solid var(--border);
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    /* TABLE */
+    .table-wrap { overflow-x: auto; margin: 2rem 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+    th {
+      background: var(--bg-card);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    tr:last-child td { border-bottom: none; }
+    td strong {
+      font-weight: 500;
+      color: var(--text-primary);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    td span {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    /* CALLOUT BOX */
+    .callout {
+      margin: 2.5rem 0;
+      padding: 1.5rem 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--bg);
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+    .callout .label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.75rem;
+    }
+    .callout p { margin-bottom: 0; }
+
+    /* FOOTER */
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-tertiary);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    footer a { color: var(--text-tertiary); text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--text-primary); }
+
+    @media (max-width: 600px) {
+      .site { padding: 2rem 1.25rem 4rem; }
+      nav { flex-direction: column; gap: 1rem; }
+      .essay-header h1 { font-size: 26px; }
+      .essay-deck { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+
+    <nav>
+      <a class="nav-name" href="index.html">Durgam Vahia</a>
+      <div class="nav-links">
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+
+    <div class="essay-header">
+      <div class="essay-meta">
+        <span class="essay-pill">Essay</span>
+        <span class="essay-date">June 2026</span>
+      </div>
+      <h1>Finding the Unit</h1>
+      <p class="essay-deck">Whether you build a product or a platform is not a strategic choice you make in a planning meeting. It is a consequence of what your unit of value actually is. Finding the unit is the work. Everything else follows.</p>
+    </div>
+
+    <div class="essay-body">
+
+      <p>Product or platform? The question drives org design debates, roadmap trade-offs, headcount requests. It sounds like the right place to start. It is not. The choice between product and platform follows from something more fundamental, something most teams have not yet found when they start the debate.</p>
+
+      <p>That thing is the unit of value: the smallest piece of what you are building that is genuinely useful on its own, and that repeats across the problem space. Until you can name it precisely, the product-versus-platform debate is premature.</p>
+
+      <h2>What chemistry and biology teach us</h2>
+
+      <p>In the mid-1800s, chemists had accumulated enough observations of specific substances (sulfur, mercury, salt, phosphorus) that Mendeleev could see a pattern underneath them. The elements were always there. Carbon was carbon long before any chemist encountered it. What changed was that enough specific instances had been studied that the underlying unit became legible. The periodic table was not designed top-down. It was read off the accumulated evidence of specific materials.</p>
+
+      <p>Biology works differently. The protein structures that make life possible were not waiting to be discovered. They did not exist before evolution built them, one specific experiment at a time, across billions of generations. The immunoglobulin fold, a structural unit that appears in antibodies, cell adhesion molecules, and immune signaling, emerged through iteration. Evolution did not design it. It accumulated it through relentless contact with specific problems.</p>
+
+      <p>In chemistry, the unit is discovered through accumulation of observations. In biology, the unit is innovated through accumulation of experiments. Both require the same prerequisite: you cannot see the unit from a whiteboard. You have to encounter it.</p>
+
+      <h2>Finding a unit in practice</h2>
+
+      <p>A few years ago I was building a product for sales, support, and customer success teams. The surface problem looked different across each group. Sales wanted to know which accounts to prioritize. Support wanted to know which customers were at risk. Customer success wanted to know which relationships needed attention before renewal. Three teams, three different framings, three different dashboards already in the room.</p>
+
+      <p>We built specific things for each group and kept looking for what was actually the same across them. What we eventually found was not a data model or a reporting structure. It was a decision type. Every one of these users, regardless of function, needed to answer the same question: what is the single most valuable action I can take right now, given everything I know about this account? The dashboards and insights tools already in the room were all circling this question without answering it. They gave users information. They did not give them a next move.</p>
+
+      <p>We did not start by building a sophisticated AI system. We started with one business unit, one sales persona, and a small set of hard-coded rules that approximated what the next best action might look like. No model. No generalization. Just enough to put something in front of real users and learn whether the unit (the decision, not the data) was actually what they needed. It was. Once that was clear, the product design followed: collect signals across all available data, run a model, surface a concrete action. The assembly happens inside the product. The user receives the output intact. That is a product unit.</p>
+
+      <h2>When the unit does not travel intact</h2>
+
+      <p>Not all units work that way. I have also built infrastructure for data teams where the unit looked entirely different. The core capability was storing, processing, and serving data reliably at scale. That capability was genuine and reusable. It also could not be delivered directly to an end user, because end users do not want infrastructure. They want outcomes, and outcomes vary so dramatically across teams and use cases that no single experience could contain them.</p>
+
+      <p>What those teams needed was the capability itself, delivered through APIs, so they could build their own logic on top of it. Data analysis, visualization, inspection, manipulation: each team had different business rules and different definitions of a useful output. The unit was the same (reliable access to data operations) but it required downstream assembly before it became useful to any specific user. That is a platform unit.</p>
+
+      <p>The distinction between these two is what determines the delivery form.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Product unit</th>
+              <th>Platform unit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Travels to the user intact</strong>
+                <span>Assembly happens inside the product. The user receives the output (a next action, a recommendation, a decision) without needing to work with the underlying components.</span>
+              </td>
+              <td>
+                <strong>Requires downstream assembly</strong>
+                <span>The unit is a primitive: a capability, an API, a data operation. Builders combine it with their own logic before it reaches a user.</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Consistent experience across users</strong>
+                <span>Different users, same interface. Variation is handled inside the system, not by the user.</span>
+              </td>
+              <td>
+                <strong>Varied experiences from the same unit</strong>
+                <span>Different builders produce different user experiences from the same underlying capability.</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Example</strong>
+                <span>Next best action surfaced to a salesperson. The signals, model, and ranking are invisible. The user sees a concrete recommendation.</span>
+              </td>
+              <td>
+                <strong>Example</strong>
+                <span>Data infrastructure APIs. One team builds a visualization tool. Another builds an analysis agent. The unit is the same. The experiences are not.</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The strategic choice between product and platform is not prior to this distinction. It follows from it. Build a platform when your unit requires assembly to be useful. Build a product when it does not.</p>
+
+      <h2>What happens when you cannot find the unit</h2>
+
+      <p>In 2012 I co-founded a company built around a real problem: enterprises were drowning in their own information. Employee-generated content (emails, documents, conversations, support tickets, sales notes) contained enormous institutional knowledge that was effectively inaccessible. People recreated work that had already been done. The information existed. Nobody could get to it.</p>
+
+      <p>We spent five years building specific things and looking for the unit. We found real components: data integrations that could pull from dozens of enterprise systems, access control logic that could enforce permissions across sources, end-user surfaces in the tools where employees already worked. What we could not find was a clean separation between the language layer and the context layer. How do you take a user's question, understand what they actually need, retrieve the right organizational knowledge, and return something genuinely useful rather than a list of documents? That question is now called retrieval-augmented generation. It has a name and a toolkit and a generation of companies building on top of it. In 2015, none of that existed.</p>
+
+      <div class="callout">
+        <div class="label">The externality problem</div>
+        <p>The unit we needed required a technological precondition (transformer-scale language models) that would not arrive until years after our runway ran out. A class of companies is now building what we built, with that missing piece available off the shelf, and the timing is dramatically in their favor. The problem is the same. The externality resolved.</p>
+      </div>
+
+      <p>This is a failure mode that does not appear in most post-mortems: not that you searched poorly, but that the unit you were converging on depended on something outside your control that had not happened yet. You can find every other component and still not be able to complete the picture. The search was sound. The precondition was absent.</p>
+
+      <h2>The sequence that follows</h2>
+
+      <p>If finding the unit requires accumulating specific observations, the sequence of how you build is not a choice either. You have to start specific. Not because starting small is virtuous, but because specific things are the only raw material from which the unit eventually becomes legible.</p>
+
+      <p>In food delivery, early market experiments ran at the level of a single zip code, testing specific item categories to understand what demand actually looked like before generalizing. In the sales product above, the first version covered one business unit, one sales persona, and a handful of hard-coded rules. Not to be cautious, but because that scope was the minimum needed to learn whether the unit was real. Neither of those starting points looked like a platform or even a product. They looked like solutions. That was the point.</p>
+
+      <p>Solutions become products when the unit repeats across enough customers that a consistent experience can be built around it. Products become platforms when the unit turns out to require downstream assembly. When what you have built is more useful as infrastructure than as a finished experience, that is the signal. Each transition follows from what you have learned, not from a plan made upfront.</p>
+
+      <p>Building a platform before you can name the unit is building the periodic table before you have encountered any elements. You will produce an architecture. Whether the primitives are the ones people actually need is a question that only specific observations can answer, and those observations come from building things narrow enough to actually learn from.</p>
+
+      <h2>The question worth sitting with</h2>
+
+      <p>Before the next product or platform investment: can you name the unit? Not the customer problem, not the product vision. The unit. The thing that is genuinely useful on its own and repeats across the problem space. If you can name it in a single precise sentence, you have enough to make the next decision. If you cannot, more specific observations come first.</p>
+
+      <p>The unit is not designed. It is found. Everything else depends on that.</p>
+
+    </div>
+
+    <footer>
+      <a href="index.html">&#8592; All essays</a>
+      <a href="mailto:durgam.vahia@gmail.com">durgam.vahia@gmail.com</a>
+    </footer>
+
+  </div>
+</body>
+</html>
