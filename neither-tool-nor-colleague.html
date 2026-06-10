@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neither Tool Nor Colleague — Durgam Vahia</title>
+  <meta name="description" content="There is an ongoing conversation on whether AI is just a tool or whether it changes everything. Both positions resolve cognitive dissonance rather than engage with what the technology actually is." />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQH0BCJ1S1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CQH0BCJ1S1');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --text-primary: #1a1a1a;
+      --text-secondary: #555;
+      --text-tertiary: #999;
+      --border: #e5e5e5;
+      --bg: #fafaf8;
+      --bg-card: #f4f3f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site { max-width: 680px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4rem;
+    }
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .nav-name:hover { opacity: 0.7; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    /* ESSAY HEADER */
+    .essay-header { margin-bottom: 3rem; }
+    .essay-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+    .essay-pill {
+      font-size: 11px;
+      padding: 2px 9px;
+      border-radius: 20px;
+      background: var(--bg-card);
+      color: var(--text-tertiary);
+    }
+    .essay-date { font-size: 12px; color: var(--text-tertiary); }
+    .essay-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--text-primary);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+    .essay-deck {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      border-left: 2px solid var(--border);
+      padding-left: 1.25rem;
+    }
+
+    /* ESSAY BODY */
+    .essay-body { font-size: 16px; font-weight: 300; color: var(--text-secondary); line-height: 1.85; }
+    .essay-body p { margin-bottom: 1.5rem; }
+    .essay-body p:last-child { margin-bottom: 0; }
+
+    .essay-body h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin: 2.5rem 0 1rem;
+    }
+
+    .essay-body a {
+      color: var(--text-primary);
+      text-decoration: underline;
+      text-decoration-color: var(--border);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.15s;
+    }
+    .essay-body a:hover { text-decoration-color: var(--text-secondary); }
+
+    /* FIGURE */
+    .figure { margin: 2.5rem 0; }
+    .figure-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.85rem;
+    }
+    .figure svg { width: 100%; height: auto; display: block; }
+
+    /* TABLE */
+    .table-wrap { overflow-x: auto; margin: 2rem 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+    th {
+      background: var(--bg-card);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    /* FOOTER */
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-tertiary);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    footer a { color: var(--text-tertiary); text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--text-primary); }
+
+    @media (max-width: 600px) {
+      .site { padding: 2rem 1.25rem 4rem; }
+      nav { flex-direction: column; gap: 1rem; }
+      .essay-header h1 { font-size: 26px; }
+      .essay-deck { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+
+    <nav>
+      <a class="nav-name" href="index.html">Durgam Vahia</a>
+      <div class="nav-links">
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+
+    <div class="essay-header">
+      <div class="essay-meta">
+        <span class="essay-pill">Essay</span>
+        <span class="essay-date">Jun 2026</span>
+      </div>
+      <h1>Neither Tool Nor Colleague</h1>
+      <p class="essay-deck">One camp believes AI will restructure economies, industries, and human cognition. Another believes the hype will fade and the world after AI will look only incrementally different from the one before it. Both positions resolve cognitive dissonance rather than engage with what the technology actually is. There is a more accurate frame, and it has consequences.</p>
+    </div>
+
+    <div class="essay-body">
+
+      <p>Frontier AI labs are in a race to push the boundaries of what models can do. A researcher's ability to test new ideas and ship promising ones determines how effective and productive they are. But the infrastructure underneath including compute clusters, data pipelines, compliance, and governance takes weeks to learn and is unforgiving when misused. The gap between what researchers need to do and what the infrastructure asks of them is real and costly. My team and I were building APIs to close it.</p>
+
+      <p>The normal path would have been a design document. Weeks of iterations, countless comments and suggestions from SWEs to VPs, sweating through which feedback to take and which to push back on without losing the room, and at the end of it all, a spec that still deferred the hardest decisions to implementation. Instead, I built a working prototype with AI in days. Not a description of the API. The API itself: callable, explorable, opinionated in specific ways that engineers could immediately engage with and argue about.</p>
+
+      <p>The prototype changed the medium of the conversation. A specification describes what an API should do. A working prototype declares it. Description involves interpretation at both ends: the writer encodes intent, the reader decodes it, and the gap between those two acts is where most product problems live. Declaration removes that gap. The engineers were not reading about the API. They were reasoning about it directly, in the same language it was written in.</p>
+
+      <p>The prototype did not make anyone faster. It made the right problems visible at a stage when they could still be changed.</p>
+
+      <h2>The anchor that broke</h2>
+
+      <p>For the entirety of human history, two kinds of entities could operate in the world: humans, who reason, and machines, which execute. The boundary was clean even when machines became extraordinarily sophisticated. A jet engine is complex. A supply chain optimization algorithm is intricate. But a human engineer understands, in principle, every step of how they work. The machine does what it was built to do.</p>
+
+      <p>This separation was more than a technical fact. It was a cognitive anchor. It told us how to relate to our tools, how to assign responsibility, how to calibrate trust. When the machine outputs something unexpected, you debug it. When a human outputs something unexpected, you have a conversation.</p>
+
+      <p>AI breaks that anchor. Large language models, combined with the layers built around them, produce outputs that sit in neither category. They respond to nuance. They handle ambiguity. They adjust to context. They push back. They surface considerations their designers did not explicitly anticipate.</p>
+
+      <p>The machine no longer executes. It responds. And human cognition, built for a world with a clean line between tools and minds, has no ready machinery for that.</p>
+
+      <h2>Where people land when the model breaks</h2>
+
+      <p>When people encounter something that breaks a mental model they have never had to question, they find the nearest familiar category and pull the new thing into it. With AI, two categories are available, and the enterprise world has sorted itself between them.</p>
+
+      <p>One camp insists AI is another machine. Sophisticated, useful, but reducible to statistical pattern matching: next-token prediction, autocomplete at scale. The framing has the appeal of intellectual restraint. Manage AI this way and you look for bounded use cases, measure against narrow benchmarks, keep humans in the loop as supervisors of a process they fully understand. You fail to build the organizational capability to engage with it as it is.</p>
+
+      <p>The other camp extrapolates from a moment of surprise to a future of radical discontinuity. If it does not fit in the machine category, it must belong in the human one. Strategy orients around transformation. This produces paralysis, governance calibrated for a future that may not arrive on the expected schedule, and attention spent on questions that cannot yet be answered.</p>
+
+      <p>Neither position engages with what the technology is.</p>
+
+      <h2>What has actually been built</h2>
+
+      <p>The "just autocomplete" dismissal captures one narrow mechanism the way "controlled explosions in metal cylinders" captures a jet engine. Technically accurate. Useless as a basis for understanding what the system does.</p>
+
+      <p>I have worked on the internals of how these systems are built. The reductive framing belongs in a different category.</p>
+
+      <p>Modern AI systems are compound. At their foundation, models trained on enormous corpora of human-generated text develop internal representations of concepts, relationships, and reasoning patterns that were not explicitly programmed. On top of that, alignment processes shape the system to optimize for outputs that reflect human judgment about what is helpful and accurate. Domain fine-tuning builds depth in particular fields, developing facility with how those fields reason. Inference-time reasoning lets models work through problems iteratively, check their own logic, and arrive at conclusions they could not reach in a single pass. Retrieval-augmented systems ground outputs in specific knowledge: your enterprise data, specialized corpora, current information.</p>
+
+      <div class="figure">
+        <div class="figure-label">Figure 1 &mdash; The compound AI stack</div>
+        <svg viewBox="0 0 640 352" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Six layered components of a modern AI system, from foundation model at base to enterprise integration at surface">
+          <title>The compound AI stack</title>
+          <desc>A layered diagram showing six components: foundation model, alignment, inference-time reasoning, domain fine-tuning, retrieval-augmented grounding, and enterprise integration.</desc>
+          <style>
+            .lr { fill: none; stroke-width: 0.75; }
+            .ll { font-family: 'DM Sans', -apple-system, sans-serif; font-size: 12.5px; font-weight: 500; }
+            .ls { font-family: 'DM Sans', -apple-system, sans-serif; font-size: 11px; font-weight: 300; }
+            .lt { font-family: 'DM Sans', -apple-system, sans-serif; font-size: 10px; }
+            .r0 { fill: #f4f3f0; stroke: #d0d0cc; }  .l0 { fill: #555; } .s0 { fill: #999; }
+            .r1 { fill: #eeeefa; stroke: #c4c4ee; }  .l1 { fill: #3a3880; } .s1 { fill: #7070b0; }
+            .r2 { fill: #eef6f2; stroke: #bcdece; }  .l2 { fill: #1a5c3a; } .s2 { fill: #4a8a6a; }
+            .r3 { fill: #eef6f2; stroke: #bcdece; }  .l3 { fill: #1a5c3a; } .s3 { fill: #4a8a6a; }
+            .r4 { fill: #eeeefa; stroke: #c4c4ee; }  .l4 { fill: #3a3880; } .s4 { fill: #7070b0; }
+            .r5 { fill: #f4f3f0; stroke: #d0d0cc; }  .l5 { fill: #555; } .s5 { fill: #999; }
+            .tag { fill: #ccc; }
+          </style>
+          <rect class="lr r0" x="0" y="300" width="640" height="48" rx="4"/>
+          <text class="ll l0" x="20" y="321" dominant-baseline="central">Foundation model</text>
+          <text class="ls s0" x="20" y="338" dominant-baseline="central">Patterns, concepts, and reasoning learned from human-generated text at scale</text>
+          <rect class="lr r1" x="0" y="248" width="640" height="48" rx="4"/>
+          <text class="ll l1" x="20" y="269" dominant-baseline="central">Alignment (RLHF + SFT)</text>
+          <text class="ls s1" x="20" y="286" dominant-baseline="central">Optimizes for outputs that reflect human judgment about what is helpful and accurate</text>
+          <rect class="lr r2" x="0" y="196" width="640" height="48" rx="4"/>
+          <text class="ll l2" x="20" y="217" dominant-baseline="central">Domain fine-tuning</text>
+          <text class="ls s2" x="20" y="234" dominant-baseline="central">Builds facility with how specific fields reason, beyond vocabulary</text>
+          <rect class="lr r3" x="0" y="144" width="640" height="48" rx="4"/>
+          <text class="ll l3" x="20" y="165" dominant-baseline="central">Inference-time reasoning</text>
+          <text class="ls s3" x="20" y="182" dominant-baseline="central">Works through problems iteratively, checks its own logic, revises conclusions</text>
+          <rect class="lr r4" x="0" y="92" width="640" height="48" rx="4"/>
+          <text class="ll l4" x="20" y="113" dominant-baseline="central">Retrieval-augmented grounding (RAG)</text>
+          <text class="ls s4" x="20" y="130" dominant-baseline="central">Connects to your enterprise data, specialized corpora, and current information</text>
+          <rect class="lr r5" x="0" y="40" width="640" height="48" rx="4"/>
+          <text class="ll l5" x="20" y="61" dominant-baseline="central">Enterprise integration</text>
+          <text class="ls s5" x="20" y="78" dominant-baseline="central">APIs, agents, workflow triggers: outputs consumed by humans and machines</text>
+          <text class="lt tag" x="625" y="324" text-anchor="end" dominant-baseline="central">base</text>
+          <text class="lt tag" x="625" y="64" text-anchor="end" dominant-baseline="central">surface</text>
+        </svg>
+      </div>
+
+      <p>The compound result exhibits something that functions like understanding. Not human understanding. Not consciousness. A form of contextual reasoning that is new in the world, and that no reductive framing accounts for.</p>
+
+      <h2>What changes when humans work with it</h2>
+
+      <p>Human cognition evolved in a world where language was the exclusive domain of minds. When something uses language fluently, tracking context, responding to nuance, producing synthesis across domains, the brain does not process it as output. It processes it as communication. The cognitive systems that activate are the same ones that activate with another person.</p>
+
+      <p>The feature store work made this concrete. The hard design problems: how to handle idempotency across agent retries, how to version immutably without breaking researcher workflows, how to make the same API legible to a human in a notebook and to a machine constructing calls from context. These are the problems that get papered over in a document. You write the decision down and it looks resolved. In working code, nothing is hidden. Every tradeoff is either handled or visibly absent.</p>
+
+      <p>AI made it possible to reach that level of concreteness before organizational momentum locked in a direction. That changed what engineers could engage with. The feedback loop that normally runs over weeks: write spec, review, revise, hand to engineering, discover the real problems. It collapsed. Not because anyone worked faster. Because the artifact changed what kind of feedback was possible. This is the same pattern as <a href="finding-the-unit.html">starting specific</a>: you cannot see the unit from a whiteboard, and you cannot find the real problems from a document.</p>
+
+      <p>Software is the clearest domain to observe this because the output is directly verifiable. You run it, and it either works or it does not. That verifiability is what enabled real delegation: not AI-assisted coding where a human drives, but AI-primary coding where the human reviews, hardens, and architects.</p>
+
+      <div class="figure">
+        <div class="figure-label">Figure 2 &mdash; Observable changes in engineering and product teams</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Before</th>
+                <th>After</th>
+                <th>What changed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>PM output</td>
+                <td>Specification document</td>
+                <td>Working prototype</td>
+                <td>Describe &rarr; show</td>
+              </tr>
+              <tr>
+                <td>Eng focus</td>
+                <td>Build and implement</td>
+                <td>Harden and architect</td>
+                <td>Create &rarr; evaluate</td>
+              </tr>
+              <tr>
+                <td>Artifact consumer</td>
+                <td>Human reader<br><span style="font-size:12px;color:var(--text-tertiary)">docs, specs, decks</span></td>
+                <td>Agent + human<br><span style="font-size:12px;color:var(--text-tertiary)">structured, parseable</span></td>
+                <td>Human-first &rarr; agent-first</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p>One explicit design constraint in the feature store work was that the API had to serve both a human researcher in a notebook and an AI agent constructing calls from context. What became clear is that the two do not need the same polish. Agents tolerate rough edges that would frustrate humans. What they share is a need for semantic clarity. When the API is declarative and the services it exposes are named and abstracted precisely, both a human and an agent can reason about what to call and why. Ambiguity in the abstraction costs both equally. Clarity in the abstraction serves both equally. The design target is not identical, but the principle that gets you there is.</p>
+
+      <p>Every previous API was designed for humans, and agents worked around the friction. Here the friction disappeared for both, not because anyone optimized for agents, but because taking human cognitive load seriously enough produces the same result. That is not a productivity story. It is evidence of something categorically different happening at the human-machine boundary.</p>
+
+      <h2>A more accurate mental model</h2>
+
+      <p>AI systems are the first machines that operate in the human cognitive layer. Every previous technology operated below it. Machines processed physical matter, moved information, executed computation. Humans stood outside those processes, directing them. The interface between human and machine was always a translation: from human intent into machine language, from machine output back into human meaning.</p>
+
+      <p>Under the hood, the machine is doing mathematics. The semantic model it operates from is not biological. It has no feelings, no lived experience, no stakes in the outcome. But experientially, the translation layer is gone. These systems operate directly in the visible medium of human thought: language, reasoning, and analogy. They do not execute human intent. They engage with it. That is what makes them categorically different from previous technology, and what the existing mental models cannot accommodate.</p>
+
+      <p>AI systems that engage in the human cognitive layer are a new category. The rules of engagement are different, and frameworks built for previous technology produce systematically wrong results when applied here.</p>
+
+      <h2>What changes operationally</h2>
+
+      <p>If your product development process still treats written specifications as the primary alignment tool between product and engineering, you are optimizing for a workflow that AI has already made obsolete. The document describes intent. The prototype embodies decisions. Engineers can engage with decisions in ways they cannot engage with intent.</p>
+
+      <p>Teams building documentation formats and organizational outputs readable by both humans and machines today will have a structural advantage that grows as agent capabilities grow. The question is what you produce and who, or what, consumes it.</p>
+
+      <p>Productivity gains from AI do not distribute evenly. They concentrate in people and teams who have developed fluency in how to engage, evaluate, and iterate with these systems. That fluency is trainable. Treating it as a personal preference is how organizations leave the gains to chance.</p>
+
+      <p><a href="non-determinism-ai.html">Governance designed for deterministic systems</a> will fail in ways that are hard to see until they are expensive. The relevant failure mode is not the AI producing a wrong answer. It is the human treating a fluent answer as a reliable one. Fluency and accuracy are not correlated in ways human cognition is built to detect. The governance question is not whether the output is authorized. It is whether the person receiving it is <a href="statistical-reasoning-ai.html">calibrated correctly</a>.</p>
+
+      <h2>What remains uncertain</h2>
+
+      <p>The ceiling of these systems is not knowable from here. The trajectory of the human-AI dynamic as capability improves is not settled. Anyone who resolves that uncertainty with confidence is not reasoning from evidence.</p>
+
+      <p>The feature store work did not resolve cleanly into a success story. The prototype surfaced tradeoffs we had not anticipated. Some design decisions were wrong and got revised. That is the point. The AI did not produce answers. It produced a concrete artifact that made the right questions visible early enough to matter.</p>
+
+      <p>The constraint is not the technology.</p>
+
+    </div>
+
+    <footer>
+      <a href="index.html">&#8592; All essays</a>
+      <a href="mailto:durgam.vahia@gmail.com">durgam.vahia@gmail.com</a>
+    </footer>
+
+  </div>
+</body>
+</html>
