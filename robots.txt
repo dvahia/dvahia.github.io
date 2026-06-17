@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://durgamvahia.com/sitemap.xml
