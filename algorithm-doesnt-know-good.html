@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Algorithm Was Never Listening — Durgam Vahia</title>
+  <meta name="description" content="Recommendation systems cannot detect authenticity. They run a short, proxy-driven bet on your content and lock in fast. Understanding the bet changes what you do before you publish." />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQH0BCJ1S1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CQH0BCJ1S1');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --text-primary: #1a1a1a;
+      --text-secondary: #555;
+      --text-tertiary: #999;
+      --border: #e5e5e5;
+      --bg: #fafaf8;
+      --bg-card: #f4f3f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site { max-width: 680px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4rem;
+    }
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .nav-name:hover { opacity: 0.7; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    /* ESSAY HEADER */
+    .essay-header { margin-bottom: 3rem; }
+    .essay-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+    .essay-pill {
+      font-size: 11px;
+      padding: 2px 9px;
+      border-radius: 20px;
+      background: var(--bg-card);
+      color: var(--text-tertiary);
+    }
+    .essay-date { font-size: 12px; color: var(--text-tertiary); }
+    .essay-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--text-primary);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+    .essay-deck {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      border-left: 2px solid var(--border);
+      padding-left: 1.25rem;
+    }
+    .essay-deck a {
+      color: var(--text-secondary);
+      text-decoration: underline;
+      text-decoration-color: var(--border);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.15s;
+    }
+    .essay-deck a:hover { text-decoration-color: var(--text-secondary); }
+
+    /* ESSAY BODY */
+    .essay-body { font-size: 16px; font-weight: 300; color: var(--text-secondary); line-height: 1.85; }
+    .essay-body p { margin-bottom: 1.5rem; }
+    .essay-body p:last-child { margin-bottom: 0; }
+
+    .essay-body h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin: 2.5rem 0 1rem;
+    }
+
+    .essay-body em {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      color: var(--text-primary);
+      font-size: 17px;
+    }
+
+    .essay-body ul {
+      margin: 0 0 1.5rem 1.25rem;
+      padding: 0;
+    }
+    .essay-body li {
+      margin-bottom: 0.6rem;
+      line-height: 1.85;
+    }
+    .essay-body li:last-child { margin-bottom: 0; }
+
+    .essay-body a {
+      color: var(--text-primary);
+      text-decoration: underline;
+      text-decoration-color: var(--border);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.15s;
+    }
+    .essay-body a:hover { text-decoration-color: var(--text-secondary); }
+
+    /* FIGURE */
+    .figure { margin: 2.5rem 0; }
+    .figure-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.85rem;
+    }
+    .figure svg { width: 100%; height: auto; display: block; }
+    .figure-caption {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      line-height: 1.6;
+      margin-top: 0.85rem;
+    }
+
+    /* TABLE */
+    .table-wrap { overflow-x: auto; margin: 2rem 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+    th {
+      background: var(--bg-card);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    /* FOOTER */
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-tertiary);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    footer a { color: var(--text-tertiary); text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--text-primary); }
+
+    @media (max-width: 600px) {
+      .site { padding: 2rem 1.25rem 4rem; }
+      nav { flex-direction: column; gap: 1rem; }
+      .essay-header h1 { font-size: 26px; }
+      .essay-deck { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+
+    <nav>
+      <a class="nav-name" href="index.html">Durgam Vahia</a>
+      <div class="nav-links">
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+
+    <div class="essay-header">
+      <div class="essay-meta">
+        <span class="essay-pill">Essay</span>
+        <span class="essay-date">Jun 2026</span>
+      </div>
+      <h1>The Algorithm Was Never Listening</h1>
+      <p class="essay-deck">Three weeks ago I posted <a href="non-determinism-ai.html">an essay distinguishing three terms that get used interchangeably in AI conversations</a>: statistical, probabilistic, and non-deterministic. What happened to that post is a direct lesson in what a recommendation system can and cannot measure.</p>
+    </div>
+
+    <div class="essay-body">
+
+      <p>I posted it on <a href="https://www.linkedin.com/posts/durgamvahia_three-terms-get-used-interchangeably-in-ai-share-7471984651016761344-dR4o" target="_blank" rel="noopener noreferrer">LinkedIn</a> on a Sunday morning, hoping to go viral by evening. Instead, it got anti-viral. A few likes, no comments from anyone but me, dropping a link to the full essay where LinkedIn won't suppress it, and gone from the feed within a day.</p>
+
+      <p>The moment I hit publish, the post stopped being mine to deliver. LinkedIn's recommendation system took over distribution, weighing my immediate network, anyone it judged likely to find the content useful, and how fresh the post still was against everything else competing for the same feed. Fewer people are online early on a Sunday than on a weekday, and the system makes its first distribution decision from whoever happens to be scrolling in that window, which on Sunday morning, isn't many.</p>
+
+      <p>What happened to one post is the same thing happening to almost every connection that matters to a person right now. A job seeker reaching a hiring manager, a founder reaching a customer, a writer reaching a reader, two people trying to find each other on a dating app: none of it travels human to human anymore. It travels through a recommendation system first, and that system decides who gets seen before a single person makes a judgment of their own.</p>
+
+      <h2>The advice survivors give</h2>
+
+      <p>The standard advice for building an audience, finding a customer, getting a date, or getting noticed on a platform is some version of: be authentic, build real community, the algorithm will find you.</p>
+
+      <p>It survives because every person who says it is a survivor. Someone who built a following says "I just stayed myself," because that's the only explanation available that doesn't sound like luck or manipulation. Nobody who stayed authentic and got buried writes the companion post. There's no audience for that post, and no algorithm that would distribute it either.</p>
+
+      <p>I held a softer version of this belief for years. Write something genuinely useful, and the system will eventually surface it to the people who need it. My Sunday post is a direct test of that, and it didn't hold up.</p>
+
+      <h2>What a recommendation system can and cannot measure</h2>
+
+      <p>LinkedIn's feed runs on the same machinery as every platform that connects people to what they're looking for: LinkedIn, Facebook, Amazon, DoorDash, Tinder. Every one of them faces the same problem with anything just published or just listed. There's no prior engagement history to learn from, so the system has to decide where to place it and how hard to push it before any evidence exists. This is <em>cold start</em>, and the methods used to solve it are what decided what happened to my post.</p>
+
+      <p><em>Collaborative filtering</em> predicts what you'll engage with from what people similar to you already engaged with. It doesn't know my post is about AI terminology. It knows that accounts with an engagement history resembling mine got shown to a population with a matching history, and on a Sunday morning that population is whoever happens to be on LinkedIn at 9am scrolling, not the enterprise AI builders my network is actually made of. The match came from whoever was in the room at that hour, a different room than the one this post was written for.</p>
+
+      <p><em>Content-based filtering</em> predicts engagement from features of the content itself: text, images, format, length, structure. My post was dense, technical, no images, a wall of argument with no visual break. The model has years of prior posts to learn from, and it has learned to predict lower engagement for that shape, regardless of what the words say. What got scored was the stylistic shape of the post, length, density, the absence of a visual break. There is no mechanism in this system for reading what the argument actually says, let alone judging whether it's original or important.</p>
+
+      <p>A third mechanism runs alongside both: <em>time decay</em>. A post's relevance score drops with elapsed time, on the assumption that fresher content deserves more weight than older content competing for the same feed. The decay clock runs regardless of how strong the early signal is, and it doesn't pause to wait for a thin Sunday audience to catch up.</p>
+
+      <p>Neither filtering method, nor decay, measures authenticity or rigor. Not because engineers decided those didn't matter, but because none of them is a property you can label at the scale these systems run at. Every one of these systems trains on behavioral labels: clicks, watch time, replies, shares, how long someone stopped scrolling. "Was this precise" or "was this genuine" has no equivalent signal. It can't be collected cheaply or at scale, so it was never in the training data, regardless of what the platform's mission statement says about meaningful connection.</p>
+
+      <p>Each one ran on historical engagement patterns, agnostic to what the content actually said. There is no inherent reward in this system for authenticity. It was never the kind of input the math could take.</p>
+
+      <h2>The bet, and the window that closes it</h2>
+
+      <p>My post sat squarely inside that cold-start gap: no prior history, no prior comments, no prior shares, nothing for collaborative filtering to anchor to.</p>
+
+      <p>The solution is a short, deliberate gamble. New content gets a small slice of distribution, a test audience, based on how its features compare to things that performed well before. This is the <em>explore phase</em> of the <em>explore-exploit tradeoff</em>: spend a little distribution on uncertain bets, then commit hard to whatever shows early signal. My post's test audience was chosen using the same collaborative match and content score described above, the wrong room and the underscored shape, so the test started disadvantaged before the explore window even opened.</p>
+
+      <p>The <em>exploit phase</em> is where most content's fate gets decided, and it happens fast. If the explore audience clicks, comments, and lingers, distribution expands sharply. If they don't, the system stops investing within minutes or hours and moves on. There's no second look. The window closes, and what happened inside it is the final word.</p>
+
+      <p>My post's explore audience was smaller than it would have been on a Tuesday, simply because fewer people were active and scrolling. A smaller audience produces fewer comments in absolute terms even if the rate of engagement per viewer is identical. A few likes with no outside comments is close to the floor of what a signal can look like.</p>
+
+      <p>Decay made this worse. Every minute spent waiting for a small Sunday audience to respond was also a minute the post's relevance score was dropping. The post needed less time to prove itself, not more, at the exact moment it had the smallest audience available to do that proving with. Near-silence in that window read to the system as weak signal, and weak signal is what it had to work with inside the first hour. It measured how little a small, mistimed, fast-decaying audience had to say before the window closed.</p>
+
+      <p>There's a second mechanism, and it makes this worse. Whatever distribution decision the system made becomes training data for the next round. Content that gets pushed wide generates engagement, and that engagement becomes the evidence the system points to as proof the content was good. Content that never gets shown generates no engagement, and that absence sits in the data as if it were evidence the content wasn't worth more reach. This is a known failure mode in recommender systems, sometimes called <em>exposure bias</em> or <em>feedback loop bias</em>: the system's past actions corrupt the data it uses to justify future actions.</p>
+
+      <p>My post lived this exactly. It never reached enough people to prove itself, so it generated no further engagement, and that absence is now the permanent record the system would point to if this post's performance ever came up again. The enterprise AI builders who would have found it most useful, the ones likely to share it further, never got the chance to generate the signal that might have changed the outcome. They were never shown it.</p>
+
+      <div class="figure" id="diagram-mount">
+        <div class="figure-label">Figure 1 &mdash; How a recommendation system decides what survives</div>
+        <svg width="100%" viewBox="0 0 680 460" role="img" aria-label="Diagram showing the explore phase, exploit phase, and feedback loop in a recommendation system">
+          <title>How a recommendation system decides what survives</title>
+          <desc>New content enters an explore phase where it gets shown to a small test audience based on content features, while time decay shrinks how long that window stays open. Strong early signal leads to exploit, where distribution expands sharply. Weak early signal leads to the content being dropped, with no path back. The engagement data generated by whichever path was taken feeds back into the training data, reinforcing the system's original decision.</desc>
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
+
+          <rect x="270" y="20" width="140" height="56" rx="8" fill="#f4f3f0" stroke="#d0d0cc" stroke-width="0.5"/>
+          <text x="340" y="40" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a1a1a" font-family="DM Sans, -apple-system, sans-serif">New content</text>
+          <text x="340" y="58" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#999" font-family="DM Sans, -apple-system, sans-serif">No engagement history</text>
+
+          <line x1="340" y1="76" x2="340" y2="110" stroke="#999" stroke-width="1" marker-end="url(#arrow)"/>
+
+          <rect x="240" y="110" width="200" height="56" rx="8" fill="#eeeefa" stroke="#c4c4ee" stroke-width="0.5"/>
+          <text x="340" y="130" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#3a3880" font-family="DM Sans, -apple-system, sans-serif">Explore phase</text>
+          <text x="340" y="148" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#7070b0" font-family="DM Sans, -apple-system, sans-serif">Small test audience, feature-based bet</text>
+
+          <line x1="455" y1="100" x2="442" y2="125" stroke="#999" stroke-width="0.75" stroke-dasharray="3 3" marker-end="url(#arrow)"/>
+          <text x="510" y="95" text-anchor="middle" font-size="12" fill="#999" font-family="DM Sans, -apple-system, sans-serif">Time decay</text>
+          <text x="510" y="111" text-anchor="middle" font-size="12" fill="#999" font-family="DM Sans, -apple-system, sans-serif">shrinks the window</text>
+
+          <line x1="290" y1="166" x2="170" y2="220" stroke="#999" stroke-width="1" marker-end="url(#arrow)"/>
+          <line x1="390" y1="166" x2="510" y2="220" stroke="#999" stroke-width="1" marker-end="url(#arrow)"/>
+
+          <text x="200" y="195" text-anchor="middle" font-size="12" fill="#999" font-family="DM Sans, -apple-system, sans-serif">Weak signal</text>
+          <text x="480" y="195" text-anchor="middle" font-size="12" fill="#999" font-family="DM Sans, -apple-system, sans-serif">Strong signal</text>
+
+          <rect x="60" y="220" width="180" height="56" rx="8" fill="#faece7" stroke="#f0997b" stroke-width="0.5"/>
+          <text x="150" y="240" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#712b13" font-family="DM Sans, -apple-system, sans-serif">Dropped</text>
+          <text x="150" y="258" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#993c1d" font-family="DM Sans, -apple-system, sans-serif">Distribution stops, no path back</text>
+
+          <rect x="430" y="220" width="190" height="56" rx="8" fill="#e1f5ee" stroke="#5dcaa5" stroke-width="0.5"/>
+          <text x="525" y="240" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#085041" font-family="DM Sans, -apple-system, sans-serif">Exploit phase</text>
+          <text x="525" y="258" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#0f6e56" font-family="DM Sans, -apple-system, sans-serif">Distribution expands sharply</text>
+
+          <line x1="150" y1="276" x2="150" y2="320" stroke="#999" stroke-width="1" marker-end="url(#arrow)"/>
+          <line x1="525" y1="276" x2="525" y2="320" stroke="#999" stroke-width="1" marker-end="url(#arrow)"/>
+
+          <rect x="60" y="320" width="180" height="56" rx="8" fill="#f4f3f0" stroke="#d0d0cc" stroke-width="0.5"/>
+          <text x="150" y="340" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a1a1a" font-family="DM Sans, -apple-system, sans-serif">No engagement data</text>
+          <text x="150" y="358" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#999" font-family="DM Sans, -apple-system, sans-serif">Absence read as evidence</text>
+
+          <rect x="430" y="320" width="190" height="56" rx="8" fill="#faeeda" stroke="#ef9f27" stroke-width="0.5"/>
+          <text x="525" y="340" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#633806" font-family="DM Sans, -apple-system, sans-serif">Engagement wave</text>
+          <text x="525" y="358" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#854f0b" font-family="DM Sans, -apple-system, sans-serif">Read as proof it was good</text>
+
+          <path d="M150 376 L150 410 L525 410 L525 376" fill="none" stroke="#999" stroke-width="0.75" marker-end="url(#arrow)"/>
+          <text x="340" y="430" text-anchor="middle" font-size="12" fill="#999" font-family="DM Sans, -apple-system, sans-serif">Feeds back into training data, reinforces the original bet</text>
+        </svg>
+        <p class="figure-caption">Time decay shrinks the explore window while it's still open. Whichever path the content takes, dropped or exploited, generates the engagement data that becomes the next round's training signal.</p>
+      </div>
+
+      <p>None of this is the algorithm being unfair or broken. It's doing exactly what it was built to do: place a fast, proxy-driven bet, then double down on whatever that bet returned. Authenticity and quality were never variables in the equation.</p>
+
+      <h2>Two incomplete strategies</h2>
+
+      <p>Once the mechanism is clear, the two common strategies for getting noticed each solve for one part of the problem and leave the other part to chance.</p>
+
+      <p>Be authentic and trust the process puts all its weight on the what and leaves the to whom and the how to the system. There's no process tracking authenticity, so the outcome rides entirely on a short, noisy bet. Sometimes the bet lands. When it does, the result gets told as a story about staying true to yourself, and the advice picks up one more data point it can't actually claim credit for.</p>
+
+      <p>Write for the algorithm solves the opposite half. It correctly spots that the system is making a bet, and tries to win that bet by reverse-engineering whatever features correlated with past exploitation, the hooks, the formats, the structures that got pushed wide before. What it leaves out is the substance the bet was supposed to be a proxy for. You can win the bet and still not get the customer, the candidate, or the conversation you were trying to have, because you optimized for what satisfies a classifier instead of what serves a person.</p>
+
+      <p>Both treat authenticity and distribution as a tradeoff, where more of one comes at the cost of the other. They aren't a tradeoff. They're sequenced. It's the same pattern I noticed when <a href="neither-tool-nor-colleague.html">writing about how people resolve the discomfort of AI</a>: two camps, each holding half the picture, each mistaking their half for the whole.</p>
+
+      <h2>What, to whom, and how</h2>
+
+      <p>The recommendation system has one job: amplify a signal once it has one. In the explore phase it generates a weak signal on its own from content features, that's the bet, but a weak, short-lived signal is all it can produce alone. It cannot originate a strong signal, decide who the right audience is, or choose the moment something should first appear. Those three things have to come from a human, before or during the explore window.</p>
+
+      <p><em>The what</em> is the content itself, made without compromise. <em>The to whom</em> is the actual audience this is for, not the algorithm's guess from a thin behavioral history, but specific people who'd find it useful, reached directly. <em>The how</em> is the deliberate first push, a direct message, a personal share, a send to someone who might forward it, that generates a real signal before the system's own brief bet is the only evidence on the table.</p>
+
+      <p>Specificity on all three changes what the explore and exploit phases have to work with, and vagueness on any one breaks differently than the others.</p>
+
+      <ul>
+        <li>A vague <em>what</em> gives the content score nothing to grab onto.</li>
+        <li>A vague <em>to whom</em> leaves the collaborative match guessing at a population instead of reaching the people the content was built for.</li>
+        <li>A vague or absent <em>how</em> leaves the explore window with no signal at all beyond whatever the system invents on its own.</li>
+      </ul>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Approach</th>
+              <th>What it supplies</th>
+              <th>What it's missing</th>
+              <th>Outcome</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Be authentic, trust the algorithm</td>
+              <td>The what</td>
+              <td>A chosen audience and a deliberate channel</td>
+              <td>Outcome decided by a noisy, short-lived bet</td>
+            </tr>
+            <tr>
+              <td>Optimize for the algorithm</td>
+              <td>A way to win the bet</td>
+              <td>The substance the bet was supposed to serve</td>
+              <td>Wins the proxy, loses the real outcome</td>
+            </tr>
+            <tr>
+              <td>Supply what, who, and how</td>
+              <td>All three, in order, before the system bets</td>
+              <td>Nothing it needs to invent</td>
+              <td>The bet starts already won</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Do all three, and the explore phase isn't testing whether your content is good. It's amplifying something people already proved was good, which is the only kind of proof the system was ever capable of running on.</p>
+
+      <h2>What I'd do with that Sunday post now</h2>
+
+      <p>The content wouldn't change. What I'd add is the part I left to the system last time: deciding who saw it first and how.</p>
+
+      <p>Before publishing, I'd send the post directly to a few people who've actually hit this confusion in their own work. Not to generate a response on a timer, but because their reaction would tell me something true about whether the message landed.</p>
+
+      <p>That's different from coordinating likes and comments to fool the explore phase, a well-known abuse that takes the form of engagement pods, click farms, and groups of accounts agreeing to react to each other on cue. Both tactics put a human signal in front of the system before the algorithm sees the post, and the system can't tell them apart. The difference is whether the people responding actually care about the content or are just performing engagement on request. One produces a real reaction from someone the work was for. The other produces a number.</p>
+
+      <p>Authenticity aimed at a system that can't measure it is a bet. The same authenticity, validated by the human network you've already built with people you trust, is a strength. Call it human-initiated distribution.</p>
+
+      <p>The algorithm was never going to recognize that the post was good. It was never built to. Use the network you trust to put something in motion, and the algorithm will do what it was always going to do: amplify whatever is already moving.</p>
+
+    </div>
+
+    <footer>
+      <a href="index.html">&#8592; All essays</a>
+      <a href="mailto:durgam.vahia@gmail.com">durgam.vahia@gmail.com</a>
+    </footer>
+
+  </div>
+</body>
+</html>
