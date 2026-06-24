@@ -73,38 +73,41 @@
 
   :root {
     --ink: #1a1917;
-    --ink-mid: #4a4845;
-    --ink-light: #888580;
-    --paper: #f7f5f0;
-    --rule: #e0ddd6;
-    --accent: #b85c28;
+    --ink-2: #3a3835;
+    --ink-3: #6b6763;
+    --ink-4: #9c9890;
+    --paper: #faf9f6;
+    --paper-2: #f0ede6;
+    --border: rgba(26,25,23,0.1);
+    --border-med: rgba(26,25,23,0.18);
     --col: 640px;
   }
+
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
 
   body {
     background: var(--paper);
     color: var(--ink);
     font-family: 'DM Sans', sans-serif;
-    font-size: 18px;
-    line-height: 1.75;
+    font-weight: 300;
+    line-height: 1.7;
     padding: 0 24px;
   }
 
   nav {
     max-width: var(--col);
-    margin: 0 auto;
+    margin: 0 auto 3.5rem;
     padding: 2rem 0 1.75rem;
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    border-bottom: 1px solid var(--rule);
-    margin-bottom: 0;
+    border-bottom: 1px solid var(--border);
   }
   nav a {
     font-family: 'DM Sans', sans-serif;
     font-size: 0.78rem;
     font-weight: 400;
-    color: var(--ink-light);
+    color: var(--ink-3);
     text-decoration: none;
     letter-spacing: 0.01em;
   }
@@ -116,106 +119,108 @@
     max-width: var(--col);
     margin: 0 auto;
     padding: 2.5rem 0 3rem;
-    border-top: 1px solid var(--rule);
+    border-top: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1rem;
   }
-  footer a { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--ink-light); text-decoration: none; }
+  footer a { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--ink-4); text-decoration: none; }
   footer a:hover { color: var(--ink); }
   .footer-links { display: flex; gap: 1.25rem; }
 
   .essay {
     max-width: var(--col);
     margin: 0 auto;
-    padding: 56px 0 0;
   }
 
-  /* Header */
-  .kicker {
+  .essay-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+  .essay-pill {
+    font-family: 'DM Sans', sans-serif;
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
+    padding: 2px 9px;
+    border-radius: 20px;
+    background: var(--paper-2);
+    color: var(--ink-4);
+  }
+  .essay-date {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-4);
   }
 
   h1 {
     font-family: 'DM Serif Display', serif;
-    font-size: clamp(28px, 4.5vw, 44px);
+    font-size: 2.4rem;
     line-height: 1.15;
     font-weight: 400;
+    letter-spacing: -0.01em;
     color: var(--ink);
-    margin-bottom: 32px;
-    max-width: 560px;
-  }
-
-  .byline {
-    font-size: 13px;
-    color: var(--ink-light);
-    padding-bottom: 40px;
-    border-bottom: 1px solid var(--rule);
-    margin-bottom: 48px;
-  }
-
-  /* Body text */
-  p {
-    margin-bottom: 24px;
-    color: var(--ink);
+    margin-bottom: 1.25rem;
   }
 
   .lede {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(19px, 2.5vw, 22px);
-    line-height: 1.55;
-    color: var(--ink);
-    margin-bottom: 28px;
-  }
-
-  /* Pull quote — single strong sentence lifted from text */
-  .pull {
-    border-left: 3px solid var(--accent);
-    padding: 4px 0 4px 24px;
-    margin: 40px 0;
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(18px, 2.2vw, 21px);
-    line-height: 1.45;
-    color: var(--ink-mid);
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--ink-2);
     font-style: italic;
+    border-left: 2px solid var(--border-med);
+    padding-left: 1.25rem;
+    margin-bottom: 2rem;
   }
 
-  /* Section breaks */
-  hr {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 48px 0;
+  p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--ink-2);
+    margin-bottom: 1.1rem;
   }
 
   h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(18px, 2.4vw, 22px);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
     font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin: 2.5rem 0 1rem;
+  }
+
+  .pull {
+    border-left: 2px solid var(--border-med);
+    padding: 0.1rem 0 0.1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 1.05rem;
+    font-style: italic;
     color: var(--ink);
-    margin: 48px 0 20px;
-    letter-spacing: -0.01em;
+    line-height: 1.65;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.75rem 0;
   }
 
   /* Visual containers */
   .visual-block {
-    margin: 44px -32px;
-    background: #fff;
-    border: 1px solid var(--rule);
-    border-radius: 8px;
-    padding: 32px 32px 24px;
+    margin: 1.75rem -28px;
+    background: var(--paper-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px 28px 20px;
   }
 
   .visual-caption {
-    font-size: 13px;
-    color: var(--ink-light);
-    margin-top: 16px;
+    font-size: 0.8rem;
+    color: var(--ink-4);
+    margin-top: 14px;
     line-height: 1.5;
   }
 
@@ -253,20 +258,23 @@
   line.arr, path.arr { stroke: #888580; stroke-width: 1.5; fill: none; }
 
   @media (max-width: 600px) {
-    .visual-block { margin: 36px -8px; padding: 20px 12px 16px; }
-    body { font-size: 17px; }
+    body { padding: 0 1.25rem; }
+    h1 { font-size: 1.9rem; }
+    .visual-block { margin: 1.25rem -8px; padding: 16px 12px 14px; }
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
       --ink: #e8e5de;
-      --ink-mid: #b0ada6;
-      --ink-light: #777470;
+      --ink-2: #c0bdb6;
+      --ink-3: #888580;
+      --ink-4: #666360;
       --paper: #171614;
-      --rule: #2e2c28;
-      --accent: #d4713a;
+      --paper-2: #1e1c18;
+      --border: rgba(255,255,255,0.08);
+      --border-med: rgba(255,255,255,0.15);
     }
-    .visual-block { background: #1e1c18; border-color: #2e2c28; }
+    .visual-block { background: #1e1c18; border-color: rgba(255,255,255,0.08); }
 
     .c-blue   rect, .c-blue   circle { fill: #0C447C; stroke: #85B7EB; }
     .c-blue   .th, .c-blue   .t  { fill: #B5D4F4; }
@@ -292,9 +300,9 @@
     .c-purple .th, .c-purple .t  { fill: #CECBF6; }
     .c-purple .ts { fill: #AFA9EC; }
 
-    line.arr, path.arr { stroke: #777470; }
-    .t, .th { fill: #e8e5de; font-family: 'DM Sans', sans-serif; }
-    .ts { fill: #777470; font-family: 'DM Sans', sans-serif; }
+    line.arr, path.arr { stroke: #666360; }
+    .t, .th { fill: #e8e5de; }
+    .ts { fill: #777470; }
   }
 </style>
 </head>
@@ -309,14 +317,12 @@
 
 <article class="essay">
 
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
-    <span style="font-family:'DM Sans',sans-serif;font-size:11px;padding:2px 9px;border-radius:20px;background:rgba(26,25,23,0.06);color:var(--ink-light);">Essay</span>
-    <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink-light);">Jun 2026</span>
+  <div class="essay-meta">
+    <span class="essay-pill">Essay</span>
+    <span class="essay-date">Jun 2026</span>
   </div>
 
   <h1>Good Timing, Bad Foundation: Why Enterprise AI Keeps Stalling at the Same Wall</h1>
-
-  <p class="byline">Durgam Vahia &nbsp;·&nbsp; Google · LinkedIn · DoorDash · Nimeyo</p>
 
   <p class="lede">In 2013, I co-founded Nimeyo and spent the next five years building an enterprise knowledge graph that surfaced contextual information for sales, customer support, and R&D teams in their own tooling surfaces like Outlook, Gmail, and Salesforce.</p>
 
