@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Constitution for AI Applications — Durgam Vahia</title>
+  <meta name="description" content="Safety at the model layer and safety at the application layer are different problems. This document defines what safe architecture means for AI-powered applications." />
+  <meta name="author" content="Durgam Vahia" />
+  <link rel="canonical" href="https://durgamvahia.com/ai-application-constitution.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://durgamvahia.com/ai-application-constitution.html" />
+  <meta property="og:site_name" content="Durgam Vahia" />
+  <meta property="og:title" content="A Constitution for AI Applications" />
+  <meta property="og:description" content="Safety at the model layer and safety at the application layer are different problems. This document defines what safe architecture means for AI-powered applications." />
+  <meta property="og:image" content="https://durgamvahia.com/headshot.jpeg" />
+  <meta property="og:image:width" content="520" />
+  <meta property="og:image:height" content="520" />
+  <meta property="article:published_time" content="2026-06-24" />
+  <meta property="article:author" content="https://durgamvahia.com/about.html" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Constitution for AI Applications" />
+  <meta name="twitter:description" content="Safety at the model layer and safety at the application layer are different problems." />
+  <meta name="twitter:image" content="https://durgamvahia.com/headshot.jpeg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://durgamvahia.com/ai-application-constitution.html" },
+    "headline": "A Constitution for AI Applications",
+    "description": "Safety at the model layer and safety at the application layer are different problems. This document defines what safe architecture means for AI-powered applications.",
+    "image": "https://durgamvahia.com/headshot.jpeg",
+    "url": "https://durgamvahia.com/ai-application-constitution.html",
+    "datePublished": "2026-06-24",
+    "dateModified": "2026-06-24",
+    "author": {
+      "@type": "Person",
+      "name": "Durgam Vahia",
+      "url": "https://durgamvahia.com/about.html",
+      "image": "https://durgamvahia.com/headshot.jpeg",
+      "sameAs": ["https://www.linkedin.com/in/durgamvahia"]
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Durgam Vahia",
+      "url": "https://durgamvahia.com/about.html",
+      "image": "https://durgamvahia.com/headshot.jpeg"
+    }
+  }
+  </script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQH0BCJ1S1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CQH0BCJ1S1');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a1a;
+      --ink-secondary: #555;
+      --ink-faint: #999;
+      --rule: #e5e5e5;
+      --bg: #fafaf8;
+      --accent: #1a1a1a;
+      --layer-bg: #f4f3f0;
+      --principle-border: #1a1a1a;
+      --font-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-serif);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ── */
+    nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+    }
+
+    nav a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    nav .site-name {
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    nav .nav-link {
+      color: var(--ink-secondary);
+    }
+
+    nav .nav-link:hover { color: var(--ink); }
+
+    /* ── Header ── */
+    header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 0;
+    }
+
+    .essay-meta {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 2.1rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .deck {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--ink-secondary);
+      line-height: 1.65;
+      border-top: 1px solid var(--rule);
+      padding-top: 1.1rem;
+      margin-bottom: 0;
+    }
+
+    /* ── Body ── */
+    article {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    p {
+      margin-bottom: 1.4rem;
+      font-size: 1rem;
+    }
+
+    /* ── Section divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 2.5rem 0;
+    }
+
+    /* ── Layer headers (Input Trust / Processing / Execution) ── */
+    .layer-header {
+      margin: 3rem 0 0;
+    }
+
+    .layer-label {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--ink);
+      padding: 0.2rem 0.6rem;
+      margin-bottom: 0;
+    }
+
+    .layer-rule {
+      border: none;
+      border-top: 2px solid var(--ink);
+      margin: 0 0 2rem;
+    }
+
+    /* ── Article headers ── */
+    .article-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .article-number {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 0.3rem;
+    }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 1.2rem;
+    }
+
+    h2 .article-title {
+      color: var(--ink-secondary);
+      font-weight: 400;
+    }
+
+    /* ── Principle callout ── */
+    .principle {
+      border-left: 3px solid var(--principle-border);
+      padding: 0.75rem 1rem 0.75rem 1.2rem;
+      margin-bottom: 1.4rem;
+      background: var(--layer-bg);
+    }
+
+    .principle-label {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 0.4rem;
+    }
+
+    .principle p {
+      font-size: 0.95rem;
+      margin-bottom: 0;
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    /* ── Why it matters label ── */
+    .why-label {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 0.5rem;
+      margin-top: 1.2rem;
+    }
+
+    /* ── Tables ── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1.4rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    thead tr {
+      border-bottom: 2px solid var(--ink);
+    }
+
+    thead th {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    tbody td {
+      padding: 0.65rem 0.75rem;
+      color: var(--ink);
+      vertical-align: top;
+    }
+
+    tbody td:first-child {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ── Why These Six — derivation block ── */
+    .derivation {
+      background: var(--layer-bg);
+      padding: 1.5rem 1.5rem;
+      margin: 0 0 2rem;
+    }
+
+    .derivation h2 {
+      font-size: 1rem;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-faint);
+      margin-bottom: 1rem;
+    }
+
+    .derivation p {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .derivation p:last-child { margin-bottom: 0; }
+
+    /* ── Four steps visual ── */
+    .four-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin: 1.2rem 0;
+      border: 1px solid var(--rule);
+    }
+
+    .step {
+      padding: 0.9rem 0.75rem;
+      border-right: 1px solid var(--rule);
+      text-align: center;
+    }
+
+    .step:last-child { border-right: none; }
+
+    .step-num {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 0.3rem;
+    }
+
+    .step-label {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+
+    .step-failure {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      color: var(--ink-secondary);
+      line-height: 1.4;
+    }
+
+    /* ── Conclusion ── */
+    .conclusion {
+      margin-top: 2rem;
+    }
+
+    .conclusion h2 {
+      font-size: 1.1rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--ink-secondary);
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--ink); }
+
+    .footer-links {
+      margin-top: 1.5rem;
+    }
+
+    .footer-email {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+      text-decoration: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      html { font-size: 16px; }
+      h1 { font-size: 1.65rem; }
+      .four-steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .step:nth-child(2) { border-right: none; }
+      .step:nth-child(1),
+      .step:nth-child(2) { border-bottom: 1px solid var(--rule); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html" class="site-name">Durgam Vahia</a>
+    <div class="nav-links">
+      <a href="about.html" class="nav-link">About Me</a>
+    </div>
+  </nav>
+
+  <header>
+    <p class="essay-meta">Essay &nbsp;·&nbsp; Jun 2026</p>
+    <h1>A Constitution for AI Applications</h1>
+    <p class="deck">Safety at the model layer and safety at the application layer are different problems. No existing framework addresses the second one. This document is an attempt to define what it requires.</p>
+  </header>
+
+  <article>
+
+    <p>The major AI labs have done serious work on model-layer safety. Anthropic publishes a model specification that governs how Claude reasons about harm, deception, and the limits of its own authority. NIST's AI Risk Management Framework defines seven trustworthiness characteristics as a cross-industry baseline. Google's Secure AI Framework maps risks and controls across data, infrastructure, model, and application layers. These frameworks are principled, actively maintained, and increasingly adopted.</p>
+
+    <p>They address the model. None of them address the application built on top of it.</p>
+
+    <p>That gap matters more than it might appear. Traditional software executes deterministic logic: the same input produces the same output, and authority flows through code that can be audited line by line. AI applications are different in kind. They generate recommendations, interpretations, and decisions through probabilistic reasoning, and those outputs increasingly participate in operational workflows with real consequences. That combination of statistical non-determinism and operational authority is what makes AI applications a new class of software. No existing safety framework was designed for it.</p>
+
+    <p>The safety properties encoded into a model do not automatically propagate to the applications that call it. An enterprise workflow that queries a well-governed model can still launder bad data through it, route non-deterministic output into decisions it should never touch, act on unvalidated results, and execute irreversible actions without a recoverable record. The model behaved correctly. The application was not designed to be safe.</p>
+
+    <p>The rate at which AI-powered applications are being built has outpaced the rate at which architectural discipline is being applied to them. Agents accelerate this further: they construct, extend, and integrate systems faster than human engineers review the implications of each step. More applications, built faster, with less inspection at each decision point. The surface area for bad outcomes grows with every deployment.</p>
+
+    <hr>
+
+    <div class="derivation">
+      <h2>Why These Six Articles</h2>
+      <p>Every AI application does four things in sequence.</p>
+
+      <div class="four-steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-label">Ingest</div>
+          <div class="step-failure">Data can be gameable</div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-label">Reason</div>
+          <div class="step-failure">Non-determinism can corrupt decisions</div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-label">Act</div>
+          <div class="step-failure">Output acted on before validated or inspectable</div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-label">Record</div>
+          <div class="step-failure">Record incomplete or only aggregate</div>
+        </div>
+      </div>
+
+      <p>Each step has a distinct failure mode. The six articles that follow address those failure modes, no more and no less, organized across three layers: what the application trusts as input, how it processes and reasons over that input, and what it is permitted to do with the result.</p>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- LAYER 1: INPUT TRUST                  -->
+    <!-- ══════════════════════════════════════ -->
+
+    <div class="layer-header">
+      <span class="layer-label">Input Trust</span>
+      <hr class="layer-rule">
+    </div>
+
+    <div class="article-block">
+      <div class="article-number">Article I</div>
+      <h2>Data Integrity: <span class="article-title">Trust Is Earned at the Substrate</span></h2>
+
+      <div class="principle">
+        <div class="principle-label">Principle</div>
+        <p>Derive structure from data that has no incentive to be falsified. Raw communication logs, raw event records, and raw transaction history are harder to game than manually-entered fields, because gaming them requires changing the underlying behavior, not just the field that reports on it.</p>
+      </div>
+
+      <div class="why-label">Why it matters</div>
+      <p>AI-powered applications fail in a specific, underappreciated way when the data they reason over is gameable. An LLM does not detect that its inputs were fabricated under quota pressure or entered to satisfy a workflow requirement. It reasons fluently from whatever it is given, and produces confident, well-formatted output built on fiction. The output looks more authoritative than what it replaced. It cites fields, surfaces patterns, draws conclusions. What it has done is launder bad inputs through a credible synthesis layer.</p>
+      <p>Validation, citation, and audit trails (addressed in later articles) are weaker guarantees when built on a gameable substrate. Fixing data sourcing after a model is in production is harder and more expensive than getting it right before any model is involved. This article is the precondition the others assume.</p>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- LAYER 2: PROCESSING AND REASONING     -->
+    <!-- ══════════════════════════════════════ -->
+
+    <div class="layer-header">
+      <span class="layer-label">Processing and Reasoning</span>
+      <hr class="layer-rule">
+    </div>
+
+    <div class="article-block">
+      <div class="article-number">Article II</div>
+      <h2>Role Integrity: <span class="article-title">Non-Determinism Has a Place, and It Is Not the Decision Layer</span></h2>
+
+      <div class="principle">
+        <div class="principle-label">Principle</div>
+        <p>Every LLM call in an application has exactly one role: Decision, Retrieval, or Narration. That role determines what variance is acceptable. Non-determinism is safe in Narration, managed in Retrieval, and not acceptable in Decision.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>What it does</th>
+              <th>Non-determinism</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Decision</td>
+              <td>Gates what happens: triggers, rankings, risk flags</td>
+              <td>Not acceptable. Code or SQL only.</td>
+            </tr>
+            <tr>
+              <td>Retrieval</td>
+              <td>Determines what evidence is available to reason over</td>
+              <td>Managed. The constructed query is logged as a first-class artifact. Its output flows only into Narration, never into Decision.</td>
+            </tr>
+            <tr>
+              <td>Narration</td>
+              <td>Explains an already-fixed decision over already-fixed evidence</td>
+              <td>Acceptable. Wording can vary; what is true cannot.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="why-label">Why it matters</div>
+      <p>LLM non-determinism is often treated as a property of the technology. It is a property of where in the architecture the model is asked to operate. When a model determines both what evidence to retrieve and what decision to reach, non-determinism that was safe in narration has silently propagated into the decision layer. Two runs of the same application on the same data can produce different outcomes. No compliance or governance function can accept that, and it rarely happens through deliberate choice. It happens because there was no architectural rule preventing it.</p>
+    </div>
+
+    <div class="article-block">
+      <div class="article-number">Article III</div>
+      <h2>Output Integrity: <span class="article-title">Nothing Is Canonical Until It Clears Validation</span></h2>
+
+      <div class="principle">
+        <div class="principle-label">Principle</div>
+        <p>Generated output is not canonical on the strength of the model's own assertion. The same discipline applied in CI/CD applies here: a result is not a build until it passes validation. Validation is a structural precondition of the write path, not a separable step a caller can skip.</p>
+      </div>
+
+      <p>Cheap, deterministic checks run synchronously and gate routine display: does every cited fact appear in the evidence the model was given? Does the structured output conform to its schema? More expensive checks run asynchronously and gate anything higher-stakes: does the conclusion hold across repeated sampling over the same fixed evidence? An output that passes the cheap checks is sufficient to show a human. It is not sufficient to act on.</p>
+
+      <div class="why-label">Why it matters</div>
+      <p>As more integration code is written by agents rather than reviewed by humans, the gap between "generate, then optionally validate, then save" and "generate, then save" closes. An agent reaching for the faster path will take it unless the commit path itself enforces validation. If persisting a result is only possible downstream of validation having passed, the skipping cannot happen by accident, under deadline pressure, or because an agent did not read the documentation.</p>
+    </div>
+
+    <div class="article-block">
+      <div class="article-number">Article IV</div>
+      <h2>Explainability: <span class="article-title">Every Conclusion Must Show Its Evidence</span></h2>
+
+      <div class="principle">
+        <div class="principle-label">Principle</div>
+        <p>No output may assert a conclusion without citing the specific evidence that produced it: the actual record, the actual value, the actual date the system reasoned from. A person must be able to verify the claim in under a minute, not take it on faith.</p>
+      </div>
+
+      <div class="why-label">Why it matters</div>
+      <p>The documented, repeating reason AI recommendations fail to get adopted is not that they are wrong. It is that the person receiving them cannot inspect the reasoning. Without a visible evidence trail, the recipient must either accept the output uncritically or ignore it. Neither outcome is the one the application was built to produce. Citation also makes role separation legible to the person in the loop: if the narration layer is only permitted to explain a decision already made over evidence already fixed, the citation is what demonstrates that constraint held.</p>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- LAYER 3: EXECUTION AND ACCOUNTABILITY -->
+    <!-- ══════════════════════════════════════ -->
+
+    <div class="layer-header">
+      <span class="layer-label">Execution and Accountability</span>
+      <hr class="layer-rule">
+    </div>
+
+    <div class="article-block">
+      <div class="article-number">Article V</div>
+      <h2>Action Integrity: <span class="article-title">Confidence Is Not Authorization</span></h2>
+
+      <div class="principle">
+        <div class="principle-label">Principle</div>
+        <p>What an application is permitted to do is determined by the reversibility of the action and who performs it, not by how confident the system is in its recommendation. Confidence determines eligibility to propose an action. It never determines who or what is permitted to execute it.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Who executes</th>
+              <th>Examples</th>
+              <th>Precondition</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tier 1: Autonomous</td>
+              <td>Machine, no review</td>
+              <td>Tagging a record, updating a computed score</td>
+              <td>Low reversibility cost; often no model involved</td>
+            </tr>
+            <tr>
+              <td>Tier 2: Approve, then execute</td>
+              <td>Human approves; machine performs</td>
+              <td>Scheduling, updating a shared internal field</td>
+              <td>Validated output and explicit human approval</td>
+            </tr>
+            <tr>
+              <td>Tier 3: Human-performed</td>
+              <td>Machine drafts only</td>
+              <td>Sending a message, any external commitment</td>
+              <td>Validated output and explicit human approval</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Tier assignments are hardcoded safety boundaries, not configurable policy settings. For Tier 3 actions, the application must be architecturally incapable of executing, not merely policy-restricted from it. The guarantee comes from the system not holding execution credentials for that action class. The draft is handed off into the human's own tool for them to personally perform.</p>
+
+      <div class="why-label">Why it matters</div>
+      <p>Policy documents describe what a system should do. Architecture determines what it can do. These are not the same guarantee. A policy can have a bug, be misread, or be bypassed under incident pressure. An architectural incapability cannot. The higher the stakes of an action (external communications, financial commitments, anything irreversible), the more the safety guarantee must come from the latter, not the former.</p>
+    </div>
+
+    <div class="article-block">
+      <div class="article-number">Article VI</div>
+      <h2>Audit Integrity: <span class="article-title">Every Decision Must Be Reconstructable</span></h2>
+
+      <div class="principle">
+        <div class="principle-label">Principle</div>
+        <p>State transitions on any proposed or executed action are event-sourced: appended, never overwritten. A status field is a derived convenience view. The event log is the source of truth. The full chain from substrate to signal to recommendation to validation tier to human decision to execution must be reconstructable for any individual action, on demand.</p>
+      </div>
+
+      <div class="why-label">Why it matters</div>
+      <p>Governance, compliance, and legal functions share one need: reconstruct exactly what happened for a specific decision, not as an aggregate, but as an individual chain. Event logging is not the same as an audit trail. A log records what happened. An audit trail is a structure from which what happened can be fully reconstructed, in sequence, for any action, independently of any other. As AI applications gain authority over consequential decisions, this distinction moves from a best practice to a minimum requirement for operating with legal and regulatory confidence.</p>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- CONCLUSION                            -->
+    <!-- ══════════════════════════════════════ -->
+
+    <div class="conclusion">
+      <h2>The Chain Is Load-Bearing</h2>
+      <p>The six articles above are not independently valuable. They form a chain. Substrate integrity makes validation meaningful. Validation makes citation trustworthy. Role separation contains non-determinism to where it cannot corrupt decisions. Action tier separation makes human oversight structural rather than procedural. The audit trail makes the whole chain inspectable after the fact.</p>
+      <p>Any article implemented without the others produces a false sense of safety. An application that validates outputs sourced from gameable data has validated the laundering. An application that cites evidence but lets the model make decisions has placed non-determinism in the wrong tier. An application with a complete audit trail and no action tier boundary has faithfully recorded the moment a system executed something it should never have been able to.</p>
+      <p>Building on a well-governed model is the starting condition. It is not a substitute for governing the application.</p>
+    </div>
+
+  </article>
+
+  <footer>
+    <a href="index.html" class="back-link">← All essays</a>
+    <div class="footer-links">
+      <a href="mailto:durgam.vahia@gmail.com" class="footer-email">durgam.vahia@gmail.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
