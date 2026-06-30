@@ -18,16 +18,16 @@
   <meta property="og:site_name" content="Durgam Vahia" />
   <meta property="og:title" content="The Algorithm Was Never Listening" />
   <meta property="og:description" content="Recommendation systems cannot detect authenticity. They run a short, proxy-driven bet on your content and lock in fast, before a person ever judges it." />
-  <meta property="og:image" content="https://durgamvahia.com/headshot.jpeg" />
-  <meta property="og:image:width" content="520" />
-  <meta property="og:image:height" content="520" />
+  <meta property="og:image" content="https://durgamvahia.com/slides/hero-14.png" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="720" />
   <meta property="article:published_time" content="2026-06-16" />
   <meta property="article:author" content="https://durgamvahia.com/about.html" />
 
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="The Algorithm Was Never Listening" />
   <meta name="twitter:description" content="Recommendation systems cannot detect authenticity. They run a short, proxy-driven bet on your content and lock in fast, before a person ever judges it." />
-  <meta name="twitter:image" content="https://durgamvahia.com/headshot.jpeg" />
+  <meta name="twitter:image" content="https://durgamvahia.com/slides/hero-14.png" />
 
   <script type="application/ld+json">
   {
@@ -132,6 +132,13 @@
       color: var(--text-tertiary);
     }
     .essay-date { font-size: 12px; color: var(--text-tertiary); }
+    .hero-img {
+      margin: 0 0 2.5rem;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .hero-img img { display: block; width: 100%; height: auto; }
     .essay-header h1 {
       font-family: 'DM Serif Display', serif;
       font-size: 32px;
@@ -284,6 +291,13 @@
       <h1>The Algorithm Was Never Listening</h1>
       <p class="essay-deck">Three weeks ago I posted <a href="non-determinism-ai.html">an essay distinguishing three terms that get used interchangeably in AI conversations</a>: statistical, probabilistic, and non-deterministic. What happened to that post is a direct lesson in what a recommendation system can and cannot measure.</p>
     </div>
+
+    <figure class="hero-img">
+      <picture>
+        <source srcset="slides/hero-14.webp" type="image/webp">
+        <img src="slides/hero-14.png" alt="Funnel diagram showing how recommendation systems handle the cold start problem through explore-exploit phases, with feedback loop bias determining which content survives" width="1280" height="720" loading="lazy">
+      </picture>
+    </figure>
 
     <div class="essay-body">
 

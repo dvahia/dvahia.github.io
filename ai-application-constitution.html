@@ -18,16 +18,16 @@
   <meta property="og:site_name" content="Durgam Vahia" />
   <meta property="og:title" content="A Constitution for AI Applications" />
   <meta property="og:description" content="Safety at the model layer and safety at the application layer are different problems. This document defines what safe architecture means for AI-powered applications." />
-  <meta property="og:image" content="https://durgamvahia.com/headshot.jpeg" />
-  <meta property="og:image:width" content="520" />
-  <meta property="og:image:height" content="520" />
+  <meta property="og:image" content="https://durgamvahia.com/slides/hero-07.png" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="720" />
   <meta property="article:published_time" content="2026-06-24" />
   <meta property="article:author" content="https://durgamvahia.com/about.html" />
 
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="A Constitution for AI Applications" />
   <meta name="twitter:description" content="Safety at the model layer and safety at the application layer are different problems." />
-  <meta name="twitter:image" content="https://durgamvahia.com/headshot.jpeg" />
+  <meta name="twitter:image" content="https://durgamvahia.com/slides/hero-07.png" />
 
   <script type="application/ld+json">
   {
@@ -139,6 +139,14 @@
       text-transform: uppercase;
       margin-bottom: 1.25rem;
     }
+
+    .hero-img {
+      margin: 0 0 2.5rem;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+    .hero-img img { display: block; width: 100%; height: auto; }
 
     h1 {
       font-family: var(--font-serif);
@@ -458,6 +466,13 @@
     <h1>A Constitution for AI Applications</h1>
     <p class="deck">Safety at the model layer and safety at the application layer are different problems. No existing framework addresses the second one. This document is an attempt to define what it requires.</p>
   </header>
+
+  <figure class="hero-img">
+    <picture>
+      <source srcset="slides/hero-07.webp" type="image/webp">
+      <img src="slides/hero-07.png" alt="Blueprint showing a four-stage AI application pipeline — Ingest, Reason, Act, Record — each with identified failure modes requiring application-layer safety" width="1280" height="720" loading="lazy">
+    </picture>
+  </figure>
 
   <article>
 
