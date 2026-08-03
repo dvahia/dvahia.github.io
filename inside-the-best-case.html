@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inside the Best Case — Durgam Vahia</title>
+  <meta name="description" content="The End-State Economy, Part 1: what economic life looks like if every promise of the AI leaders comes true." />
+  <meta name="author" content="Durgam Vahia" />
+  <link rel="canonical" href="https://durgamvahia.com/inside-the-best-case.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://durgamvahia.com/inside-the-best-case.html" />
+  <meta property="og:site_name" content="Durgam Vahia" />
+  <meta property="og:title" content="Inside the Best Case" />
+  <meta property="og:description" content="The End-State Economy, Part 1: what economic life looks like if every promise of the AI leaders comes true." />
+  <meta property="og:image" content="https://durgamvahia.com/slides/inside-the-best-case-fig1.png" />
+  <meta property="og:image:width" content="1232" />
+  <meta property="og:image:height" content="882" />
+  <meta property="article:published_time" content="2026-08-03" />
+  <meta property="article:author" content="https://durgamvahia.com/about.html" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Inside the Best Case" />
+  <meta name="twitter:description" content="The End-State Economy, Part 1: what economic life looks like if every promise of the AI leaders comes true." />
+  <meta name="twitter:image" content="https://durgamvahia.com/slides/inside-the-best-case-fig1.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://durgamvahia.com/inside-the-best-case.html" },
+    "headline": "Inside the Best Case",
+    "description": "The End-State Economy, Part 1: what economic life looks like if every promise of the AI leaders comes true.",
+    "image": "https://durgamvahia.com/slides/inside-the-best-case-fig1.png",
+    "url": "https://durgamvahia.com/inside-the-best-case.html",
+    "datePublished": "2026-08-03",
+    "dateModified": "2026-08-03",
+    "author": {
+      "@type": "Person",
+      "name": "Durgam Vahia",
+      "url": "https://durgamvahia.com/about.html",
+      "image": "https://durgamvahia.com/headshot.jpeg",
+      "sameAs": ["https://www.linkedin.com/in/durgamvahia"]
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Durgam Vahia",
+      "url": "https://durgamvahia.com/about.html",
+      "image": "https://durgamvahia.com/headshot.jpeg"
+    }
+  }
+  </script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQH0BCJ1S1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CQH0BCJ1S1');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --text-primary: #1a1a1a;
+      --text-secondary: #555;
+      --text-tertiary: #999;
+      --border: #e5e5e5;
+      --bg: #fafaf8;
+      --bg-card: #f4f3f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site { max-width: 680px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4rem;
+    }
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .nav-name:hover { opacity: 0.7; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    /* ESSAY HEADER */
+    .essay-header { margin-bottom: 3rem; }
+    .essay-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+    .essay-pill {
+      font-size: 11px;
+      padding: 2px 9px;
+      border-radius: 20px;
+      background: var(--bg-card);
+      color: var(--text-tertiary);
+    }
+    .essay-date { font-size: 12px; color: var(--text-tertiary); }
+    .essay-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--text-primary);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+    .essay-deck {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      border-left: 2px solid var(--border);
+      padding-left: 1.25rem;
+    }
+
+    /* ESSAY BODY */
+    .essay-body { font-size: 16px; font-weight: 300; color: var(--text-secondary); line-height: 1.85; }
+    .essay-body p { margin-bottom: 1.5rem; }
+    .essay-body p:last-child { margin-bottom: 0; }
+
+    .essay-body h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin: 2.5rem 0 1rem;
+    }
+
+    .essay-body figure {
+      margin: 2.25rem 0;
+    }
+    .essay-body figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+    .essay-body figcaption {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: 0.65rem;
+      line-height: 1.6;
+    }
+
+    /* CALLOUT BOX */
+    .callout {
+      margin: 2.5rem 0;
+      padding: 1.5rem 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--bg);
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+    .callout .label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.75rem;
+    }
+    .callout p { margin-bottom: 0; }
+
+    /* FOOTER */
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-tertiary);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    footer a { color: var(--text-tertiary); text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--text-primary); }
+
+    @media (max-width: 600px) {
+      .site { padding: 2rem 1.25rem 4rem; }
+      nav { flex-direction: column; gap: 1rem; }
+      .essay-header h1 { font-size: 26px; }
+      .essay-deck { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+
+    <nav>
+      <a class="nav-name" href="index.html">Durgam Vahia</a>
+      <div class="nav-links">
+        <a href="about.html">About Me</a>
+      </div>
+    </nav>
+
+    <div class="essay-header">
+      <div class="essay-meta">
+        <span class="essay-pill">Essay</span>
+        <span class="essay-pill">The End-State Economy · Part 1 of 3</span>
+        <span class="essay-date">August 2026</span>
+      </div>
+      <h1>Inside the Best Case</h1>
+      <p class="essay-deck">What economic life looks like if every promise of the AI leaders comes true.</p>
+    </div>
+
+    <div class="essay-body">
+
+      <h2>Ana's Tuesday</h2>
+
+      <p>Ana wakes in a one-bedroom she can barely afford. Her dividend arrived overnight, the equal share every citizen receives, and most of it is already claimed: rent first, then a utility bill that rises every time the neighborhood's grid allocation tightens. The machines made everything cheap except the space to live in.</p>
+
+      <p>The rest of her morning costs almost nothing. The tutor teaching her daughter Mandarin, the doctor reading her bloodwork, the film scored overnight to her taste, all machine-made, all priced like air. The furniture in the room was printed for the cost of its materials.</p>
+
+      <p>Her shift starts at ten. She pours coffee at a shop that advertises a human behind every cup, and the certification seal by the door is why a cup here costs eight times the machine cafe next door. Not all customers are paying for a perfectly brewed coffee with machine precision. Many prefer a handed cup by someone who might remember their name.</p>
+
+      <p>In the evening she buys the same premium she sells. Her yoga instructor is human, no better than the free one in her glasses, but worth it to her anyway. Her health is excellent according to the advanced diagnostics, but wellbeing is different.</p>
+
+      <p>At eight she joins the city zoning hearing, where a developer wants to build forty residential units and an electric substation two blocks away. Ana has spent six years saving toward a stake in her own building, so she votes no. She blocked the supply that might have helped her buy a home.</p>
+
+      <h2>Ana's Tuesday is AI's best case</h2>
+
+      <p>Ana's Tuesday is the machine economy's best case, exactly as its builders promise it. Machines handle the work, mental and physical. Everyone shares what the machines produce, and money, in the most quoted versions, stops mattering. The heads of the major AI labs have sketched this future in essays, interviews, and keynotes, and the promise already carries real weight. It anchors policy debates, shapes how young people choose careers, and justifies trillion-dollar investments in chips and data centers.</p>
+
+      <p>The argument about that future is mostly about whether the machines will get good enough and whether any government could share the gains fairly. Both questions are speculative. Neither tells us what daily economic life looks like after the machines arrive. So this essay grants everything. The machines arrived, the political systems survived, and every citizen received an equal share of the cornucopia. Ana lives in that world, and she is still struggling.</p>
+
+      <p>The AI promise cannot explain Ana's Tuesday. The economic laws do not disappear in a world of abundance. Abundance does not end scarcity but relocates it. Prices move away from everything machines can copy and concentrate on everything they cannot make more of. Read Ana's day line by line and it becomes a map: what turns free, where the dividend goes, what work becomes, who accumulates wealth, and what governments spend their days deciding.</p>
+
+      <h2>The experiment is already in progress</h2>
+
+      <p>The economist Mark Perry maintains a chart that the Federal Reserve has passed around internally and that he calls the Chart of the Century. It tracks everyday goods and services in the American consumer price data since January 2000, and it splits the economy in two.</p>
+
+      <figure>
+        <picture>
+          <source srcset="slides/inside-the-best-case-fig1.webp" type="image/webp">
+          <img src="slides/inside-the-best-case-fig1.png" alt="Bar chart of U.S. price changes from January 2000 to 2025. Hospital services, college tuition, childcare, medical care, housing, and food rose well above overall inflation of 93 percent. TVs, computer software, toys, and cellphone service fell 43 to 98 percent." width="1232" height="882" loading="lazy">
+        </picture>
+        <figcaption>Fig. 1 — BLS CPI, Jan 2000 to 2025. Childcare uses the BLS "day care and preschool" series. Overall CPI +92.6% through Dec 2025 (Perry/AEI).</figcaption>
+      </figure>
+
+      <p>Prices in one half collapsed. Televisions fell 98 percent over twenty-five years, software 75, toys 74, cellphone service 43. Prices in the other half climbed through the same quarter century: hospital services up 275 percent, college tuition up 196, childcare up 148, all far above the 93 percent rise in overall prices.</p>
+
+      <p>The chart usually circulates as an indictment: healthcare is broken, college is a racket, someone should fix the red bars. Read it instead as one mechanism, partially complete experiments. Everything whose price was mostly human labor, labor that could be automated, digitized, or sourced from anywhere on earth, became steadily cheaper. Everything anchored to land, to credentialed professionals, and to position kept climbing. One half of the chart shows where labor content could be squeezed out of prices. The other half shows where it could not be, or was not allowed to be. William Baumol named the first half of that pattern in the 1960s: human-intensive services get pricier as productivity rises everywhere else, because they compete for the same workers. Licensing, accreditation, and restricted supply do the rest.</p>
+
+      <p>A machine economy of the kind the AI industry promises would simply finish this chart. A future is a bipolar world where AI runs the utilities, while humans produce and consume experiences.</p>
+
+      <h2>What machines make free</h2>
+
+      <p>AI's primary promise is that it is a better labor, physical or intellectual, than humans. Consider a haircut delivered by a robot. Its price is inference (robot perceiving your head and planning each cut) plus actuation (electric motors doing the cuts) plus amortized hardware (initial purchase price) plus electricity. Each of these components are driven by physics and can be optimized for efficiency. The barber's wage will drop, until it reaches physical limits.</p>
+
+      <p>Seen as labor content plus everything else, the economy sorts into tiers.</p>
+
+      <figure>
+        <picture>
+          <source srcset="slides/inside-the-best-case-fig2.webp" type="image/webp">
+          <img src="slides/inside-the-best-case-fig2.png" alt="Diagram of three price tiers under AI: digital goods trend to zero price, physical goods fall to an energy and materials floor, and goods scarce by construction absorb the surplus." width="1232" height="619" loading="lazy">
+        </picture>
+        <figcaption>Fig. 2 — Where AI pushes each price: labor content goes to zero, the rest is physics and scarcity.</figcaption>
+      </figure>
+
+      <p>Digital goods sit at one extreme. A copy of a program, a song, a diagnosis, a design carries almost no matter and almost no energy, so once machines produce them, their prices fall toward the cost of computation, which approaches zero.</p>
+
+      <p>Physical goods deflate too, but they land on a floor. I spent ten years at Sun Microsystems designing UltraSPARC microprocessors, in an industry that runs on a discipline the software world never had to learn: computation is physical. A chip's performance is capped by how much power you can deliver onto the silicon and how much heat you can pull back off it, through air or water, and no design cleverness repeals either limit. The chips training today's AI models operate under the same two ceilings. The same holds for everything with mass. AI can strip the labor share out of a car, a house, or a meal. The lithium, the steel, and the kilowatt-hours stay in the price, because they are the price. What remains, after the machines take over the work, is physics.</p>
+
+      <p>And then there is a third tier, where deflation is impossible because it is inherently scarce. Some of it is physical, set by the planet: land in the places people want to live, capacity on the electrical grid, lithium in the ground. Some of it is constructed, set by people: patents, permits, zoning, licenses, the toll a platform charges because it owns the door. And some of it is definitional: the corner table at the restaurant, the house on the hill with the view, goods where producing more is a contradiction in terms (Ferrari, Rolex). Real prices carry more than labor and physics, and the capital costs, market power, regulation live in this tier. The machines remove the labor. This tier remains, and it decides most of what follows.</p>
+
+      <h2>Software is a finished experiment</h2>
+
+      <p>One industry has already arrived at its end state, and it sits in the deflating half of the chart. Copying software has been effectively free for thirty years, which makes the software economy a completed trial run for what happens when a valuable good becomes infinitely reproducible. It produced three key insights.</p>
+
+      <p>The first matches the utopian view. Consumption has exploded. A teenager with a phone now uses more software in a day than a Fortune 500 company deployed in 1990, most of it at a price of zero. The abundance is real, and is accessible to everyone on earth. I watched one round of it from the inside. Sun helped build internet backbone by selling highly engineered proprietary servers, powered by UltraSPARCs and Solaris. Then Linux, free to copy, made the operating system a commodity, cheap Intel chips and distributed computing did the rest, and compute once rationed to corporations became available to anyone.</p>
+
+      <p>The second insight is stranger. Total household spending held firm while its destination changed. The money that cheap software and cheap goods freed up flowed across the chart into housing, healthcare, and education, and helped bid those prices up. The two halves of Perry's chart are one story. Abundance in one tier financed the bidding war in the other.</p>
+
+      <p>The third insight is an interesting one: zero cost to produce doesn't mean zero price to consume. When marginal cost to produce became zero, software pricing formed around whatever kept price above marginal cost. Microsoft's came from the default installed on every new PC and the lock of its file formats. Oracle's came from switching costs and license law: once a company's data lives in the database, leaving costs more than staying, and audit teams enforce the terms. The consumer internet ran the same play with different chokepoints, the default browser and a search box (Google), the app-store toll booth (Apple), the advertising auction (Meta). The copy was always free to make. The business was whatever made it scarce anyway, or made leaving expensive.</p>
+
+      <p>Herbert Simon, the Carnegie Mellon polymath, predicted where those fortunes would sit in 1971. Information consumes the attention of whoever receives it, he observed, so a wealth of information creates a scarcity of attention. Software supply grew without limit while human attention stayed fixed at sixteen waking hours per person. I learned the same lesson from the losing side. Nimeyo, the company I founded, built enterprise chatbots customers found valuable and paid for, and it still could not scale, because we never owned a distribution channel that drove attention. The product cost almost nothing to reproduce. Reaching people was the expensive part, and the scarce one.</p>
+
+      <p>The software experiment gives an important verdict. The software era delivered both abundance to the consumers and extreme concentration of wealth for the producers, and this test case could be prescient to the machine economy of the future.</p>
+
+      <h2>Where the dividend goes</h2>
+
+      <p>Now let's return to Ana's world and trace the money. The dividend is generous, and it arrives denominated in the abundant tiers. Digital experiences cost nothing. Healthcare is mostly low-cost. Manufactured goods cost their physics. So the dividend flows through those tiers with little friction and lands where spending still buys something contested: housing, location, energy, access. Against a fixed stock, new money can do only one thing, and that bids up the price.</p>
+
+      <figure>
+        <picture>
+          <source srcset="slides/inside-the-best-case-fig3.webp" type="image/webp">
+          <img src="slides/inside-the-best-case-fig3.png" alt="Flow diagram: the dividend is spent into the abundant tier, which bids up the scarce tier, which capitalizes into rent for the owners of the bottlenecks." width="1232" height="436" loading="lazy">
+        </picture>
+        <figcaption>Fig. 3 — The path of the dividend: equal distribution of the abundant goods ends up funding the bottlenecks.</figcaption>
+      </figure>
+
+      <p>Henry George described this dynamic a hundred and fifty years ago. George was a California journalist during the railroad boom, and the puzzle that consumed him was why spectacular progress arrived alongside deepening poverty. His answer, published in 1879 in Progress and Poverty, one of the best-selling books of its century, was that the gains of progress get capitalized into whatever cannot be reproduced. Progress raises rents before it raises wages. The landowner collects what the railroad creates, not the laborer.</p>
+
+      <p>The machine economy is an extreme version of George's theory. A universal dividend, spent into a fixed stock of land and grid capacity, converts itself into rental income for whoever owns the land and the grid. Distributing the abundant goods equally, which we assumed from the start, ends up funding the bottlenecks.</p>
+
+      <p>To make it concrete: give every person in a city an identical income and leave the housing stock fixed. The house on the hill still goes to auction, and the auction still clears at whatever price exhausts the bidders. How evenly the money was distributed makes no difference to the clearing price.</p>
+
+      <p>The natural reply is that housing supply is not actually fixed, and building more should absorb the dividend. Partly right, but new supply has to get through permits and zoning laws and Ana's resistance. Though many houses can be built, there is still one house on the hill.</p>
+
+      <h2>Labor switches sides of the ledger</h2>
+
+      <p>The strangest feature of the end state involves work itself. Human labor stays relevant but the application changes. It stops being an input and becomes the good people purchase because they want it, the way they buy wine or music.</p>
+
+      <p>That human-as-a-good premium already exists, priced and visible. People pay more for handmade furniture than for machine-made pieces that are often better built. They pay for live performance over a recording, for a human therapist over a manual with the same advice, for a sommelier's attention over a rating that predicts the wine just as well. In the end state, this premium stops being a niche and becomes the labor market. Machines produce output at energy cost. Humans get paid for being human at someone, which no factory can scale.</p>
+
+      <p>The obvious objection says humanoid machines will one day become indistinguishable from the person across the table, and the premium should collapse. That test has been run many times, and the verdict is on the side of humanity. In 1945, Dutch police arrested the painter Han van Meegeren for treason, for selling a Vermeer to Hermann Göring during the occupation. His defense was that there was no treason because there was no Vermeer. He had painted it himself, and he proved it by producing another one under guard. The canvas Göring bought never changed, molecule for molecule, yet its value collapsed.</p>
+
+      <p>Chess shows the same result. IBM's Deep Blue beat the world champion Garry Kasparov in 1997, engines left human players permanently behind soon after, and today the strongest chess on earth is played in computer championships that nobody watches, while human chess is drawing the largest audiences in its history. In both markets, buyers are paying for the object's history, for who made it and how, and no capability can counterfeit history. A Turing test measures indistinguishability. Markets price origin.</p>
+
+      <p>The objection is right about one thing. The premium pays only while human origin can be verified, so the real threat to it is fraud. Markets have solved this before: hallmarks stamped into silver, appellations on wine bottles, certification audits behind the word organic. Authenticity became a priced good with inspection infrastructure around it. The end state will need the same infrastructure. Expect proof of human origin to become a service, and expect the label certified human to do the economic work that handmade does today.</p>
+
+      <h2>What the state does all day</h2>
+
+      <p>The same scarcity rewrites the government's job description. When the contested goods are watts and acres, the decisions that matter allocate them: which power projects clear the years-long queue for permission to connect to the electrical grid, which parcels get zoned for data centers and housing, who receives the siting permits and the spectrum. Fiscal policy, the great lever of the industrial era, loses its centrality. Allocation takes its place.</p>
+
+      <p>Current politics has this backwards. It treats the AI question as a question about transfers, about who gets a check and how large. In the world we granted, the transfer was the easy part. We assumed it away in the first paragraph, and every hard problem here survived the assumption. The fights that remain are fights over who may build what, where, drawing on which grid. Post-scarcity politics is land-use politics.</p>
+
+      <h2>Back to Ana</h2>
+
+      <p>Read her Tuesday again. The apartment is expensive because land stayed scarce, and the utility bill climbs because grid capacity did. The tutor, the doctor, and the film cost nothing because machines reproduce them at the cost of computation.</p>
+
+      <p>The coffee costs eight times the machine cafe's because her customers are buying a human, and the yoga class holds its price because human attention became a consumption good. The hearing matters because no dividend can manufacture another parcel of land or another unit of grid capacity. Ana, six years into saving for a stake in her building, votes like an owner.</p>
+
+      <p>She has everything the machines can make. She still starves for everything they cannot. That is the economic system of the best case, and a single mechanism runs through every part of it. The machine economy does not eliminate scarcity. It concentrates scarcity in whatever cannot be reproduced, and daily life gets repriced around it.</p>
+
+      <p>The promise that money will stop mattering holds for everything except the things people care about most. Utopia and rentier economy are not opposites. The software era delivered both at once, and the machine economy scales both at once.</p>
+
+      <p>One more reading. Delete two details from Ana's Tuesday, the dividend and the certification seal. The rent that swallows the paycheck. The free tutor in the phone. The eight-dollar pour with a person attached. The paid class a free app could replace. The hearing where a small owner blocks new supply. That is a Tuesday in 2026. The best case is not too far away from today.</p>
+
+      <div class="callout">
+        <div class="label">Coming in Part 2</div>
+        <p>Everything here rests on one assumption: that the physical side of the best case is already built, the data centers running, the grid expanded, the watts in place. It is not, and Ana just voted against one expansion.</p>
+      </div>
+
+    </div>
+
+    <footer>
+      <a href="index.html">&#8592; All essays</a>
+      <a href="mailto:durgam.vahia@gmail.com">durgam.vahia@gmail.com</a>
+    </footer>
+
+  </div>
+</body>
+</html>
